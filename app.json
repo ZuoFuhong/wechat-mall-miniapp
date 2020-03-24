@@ -1,9 +1,6 @@
 {
   "pages": [
-    "pages/start/start",
     "pages/index/index",
-    "pages/notice/index",
-    "pages/notice/show",
     "pages/category/category",
     "pages/goods/list",
     "pages/goods-details/index",
@@ -16,23 +13,9 @@
     "pages/order/refundApply",
     "pages/wuliu/index",
     "pages/my/index",
-    "pages/recharge/index",
-    "pages/withdraw/index",
-    "pages/score-excharge/index",
-    "pages/score-excharge/growth",
-    "pages/asset/index",
-    "pages/score/index",
-    "pages/score/growth",
     "pages/sign/index",
     "pages/maidan/index",
-    "pages/fx/apply",
-    "pages/fx/apply-status",
-    "pages/fx/members",
-    "pages/fx/commisionLog",
-    "pages/coupons/index",
-    "pages/invoice/list",
-    "pages/invoice/apply",
-    "pages/deposit/pay"
+    "pages/coupons/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

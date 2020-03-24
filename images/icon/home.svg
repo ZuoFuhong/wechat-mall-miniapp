@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="17px" viewBox="0 0 16 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>首页@2x</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="详情" transform="translate(-22.000000, -606.000000)" stroke="#333333">
+            <path d="M37,621.075843 C37,621.586561 36.6010204,622 36.1086735,622 L23.8913265,622 C23.3989796,622 23,621.586561 23,621.075843 L23,613.351754 C23,612.813543 23.2408163,612.306526 23.6520408,611.978736 L29.6826531,607.171324 C30.0173469,606.924424 30.472449,606.9461 30.7836735,607.22525 L36.3872449,611.978736 C36.7755102,612.307583 37,612.799797 37,613.318975 L37,621.075843 Z" id="首页"></path>
+        </g>
+    </g>
+</svg>

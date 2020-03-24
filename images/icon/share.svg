@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>分享@2x</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="详情" transform="translate(-341.000000, -431.000000)" stroke="#EB4D50">
+            <g id="分享" transform="translate(342.000000, 432.000000)">
+                <polyline id="Stroke-1" stroke-linejoin="round" points="6.71740741 0.259407407 9.88703704 0.259407407 9.88703704 3.42866667"></polyline>
+                <path d="M9.88688889,5.73322222 L9.88688889,8.76285185 C9.88688889,9.29211111 9.45355556,9.72581481 8.92355556,9.72581481 L1.22207407,9.72581481 C0.692814815,9.72581481 0.259481481,9.29211111 0.259481481,8.76285185 L0.259481481,1.22211111 C0.259481481,0.692851852 0.692814815,0.259518519 1.22207407,0.259518519 L4.33207407,0.259518519" id="Stroke-3"></path>
+                <line x1="9.88688889" y1="0.259407407" x2="4.42725926" y2="5.71866667" id="Stroke-5"></line>
+            </g>
+        </g>
+    </g>
+</svg>
