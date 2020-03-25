@@ -22,7 +22,7 @@
       </view>
     </view>
   </view>
-  <view class="coupon">
+  <view class="coupon" bindtap="goCoupons">
     <view class="l">
       <view class="coupon-item">
         <image src="/images/coupon/pure-bg.png" />

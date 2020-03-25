@@ -94,12 +94,17 @@ Page({
   },
   onShow (){
   },
-  goHome: function() {
+  goCoupons() {
+    wx.navigateTo({
+      url: '/pages/coupons/index'
+    })
+  },
+  goHome() {
     wx.reLaunch({
       url: "/pages/index/index"
     });
   },
-  goShopCar: function() {
+  goShopCar() {
     wx.reLaunch({
       url: "/pages/shop-cart/index"
     });
