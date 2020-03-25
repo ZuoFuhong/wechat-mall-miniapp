@@ -1,12 +1,12 @@
 page {
   background: #f5f5f5;
+  padding-bottom: 100rpx;
 }
 page,view,image,input {
   display: block;
   box-sizing: border-box;
 }
 .header {
-  padding: 32rpx;
   background: #fff;
   display: flex;
   align-items: center;
@@ -14,21 +14,20 @@ page,view,image,input {
 .header .search {
   position: relative;
   width: 650rpx;
-  height: 66rpx;
+  padding: 10rpx;
 }
 .header .search input {
-  border: 1rpx solid #e3e3e3;
-  width: 100%;
-  height: 100%;
-  border-radius: 30rpx;
-  padding-left: 60rpx; 
+  background-color: #F1F1F1;
+  padding-left: 60rpx;
+  font-size: 12px;
+  height: 60rpx;
 }
 .header .search image {
-  width: 35rpx;
-  height: 35rpx;
+  width: 30rpx;
+  height: 30rpx;
   position: absolute;
-  top: 16rpx;
-  right: 40rpx;
+  top: 25rpx;
+  left: 28rpx;
 }
 .header .show-type {
   width: 40rpx;
@@ -42,13 +41,14 @@ page,view,image,input {
 }
 .filters {
   width: 100vw;
-  height: 88rpx;
+  height: 70rpx;
   background: #fff;
   display: flex;
   justify-content: space-around;
 }
 .filters .item {
-  line-height: 88rpx;
+  font-size: 28rpx;
+  line-height: 70rpx;
 }
 .filters .active {
   color:#fa1e26;
@@ -56,41 +56,38 @@ page,view,image,input {
 .list1 {
   margin: 16rpx;
   width: 718rpx;
-  height: 220rpx;
+  height: 200rpx;
   display: flex;
   background: #fff;
   border-radius: 30rpx;
   overflow: hidden;
 }
 .list1 .img {
-  width: 220rpx;
-  height: 220rpx;
+  width: 200rpx;
+  height: 200rpx;
   flex-shrink: 0;
 }
 .list1 .goods-info {
-  padding: 16rpx 32rpx 0 24rpx;
+  padding: 16rpx;
   width: 100%;
 }
 .list1 .goods-info .title {
   color: #333;
-  font-size: 30rpx;
+  font-size: 28rpx;
+  height: 100rpx;
 }
-.list1 .goods-info .price {
-  color: #FF3B30;
-  font-size: 34rpx;
-}
-.list1 .goods-info .buy-info {
+.list1 .goods-info .bottom {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
-.list1 .goods-info .buy-info .num {
-  font-size:24rpx;
+.list1 .goods-info .bottom .price {
+  color: #FF3B30;
+  font-size: 28rpx;
+  width: 150rpx;
+}
+.list1 .goods-info .bottom .saleNum {
+  font-size:22rpx;
   color:#999999;
-}
-.list1 .goods-info .buy-info .car {
-  width: 40rpx;
-  height: 40rpx;
 }
 .list2-box {
   margin: 16rpx;
@@ -100,7 +97,7 @@ page,view,image,input {
   flex-wrap: wrap;
 }
 .list2 {
-  margin: 16rpx 0;
+  margin-bottom: 16rpx;
   width: 350rpx;
   background: #fff;
   border-radius: 30rpx;
@@ -115,22 +112,19 @@ page,view,image,input {
 }
 .list2 .goods-info .title {
   color: #333;
-  font-size: 30rpx;
+  font-size: 28rpx;
+  height: 100rpx;
 }
-.list2 .goods-info .price {
-  color: #FF3B30;
-  font-size: 34rpx;
-}
-.list2 .goods-info .buy-info {
+.list2 .goods-info .bottom {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
-.list2 .goods-info .buy-info .num {
-  font-size:24rpx;
-  color:#999999;
+.list2 .goods-info .bottom .price {
+  color: #FF3B30;
+  font-size: 28rpx;
+  width: 150rpx;
 }
-.list2 .goods-info .buy-info .car {
-  width: 40rpx;
-  height: 40rpx;
+.list2 .goods-info .bottom .saleNum {
+  font-size: 22rpx;
+  color: #999999;
 }

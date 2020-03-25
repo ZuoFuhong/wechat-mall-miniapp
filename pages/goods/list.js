@@ -1,4 +1,3 @@
-const WXAPI = require('apifm-wxapi')
 Page({
 
   /**
@@ -50,13 +49,90 @@ Page({
     if (this.data.categoryId) {
       _data.categoryId = this.data.categoryId
     }
-    const res = await WXAPI.goods(_data)
+    const goods = [
+      {
+        id: 277082,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 10000.99,
+        saleNum: 10
+      },
+      {
+        id: 277082,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },
+      {
+        id: 277082,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },
+      {
+        id: 277082,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },
+      {
+        id: 277082,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },
+      {
+        id: 1,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },{
+        id: 1,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },{
+        id: 1,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },{
+        id: 1,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },{
+        id: 1,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },{
+        id: 1,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },{
+        id: 1,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      }
+    ]
+    this.setData({
+      goods
+    })
     wx.hideLoading()
-    if (res.code == 0) {
-      this.setData({
-        goods: res.data,
-      })
-    }
   },
   /**
    * 生命周期函数--监听页面隐藏
