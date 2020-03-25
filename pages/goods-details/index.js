@@ -1,6 +1,4 @@
-const app = getApp();
 const CONFIG = require('../../config.js')
-const AUTH = require('../../utils/auth')
 const SelectSizePrefix = "选择："
 
 Page({
@@ -181,7 +179,6 @@ Page({
       })
       return;
     }
-    AUTH.register(this);
   },
   closePop(){
     this.setData({

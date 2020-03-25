@@ -1,8 +1,5 @@
 const CONFIG = require('../../config.js')
-const TOOLS = require('../../utils/tools.js')
 
-//获取应用实例
-var app = getApp()
 Page({
   data: {
     inputVal: "", // 搜索框内容
@@ -65,8 +62,6 @@ Page({
     this.categories()
   },
   onShow: function(e){
-    // 获取购物车数据，显示TabBarBadge
-    TOOLS.showTabBarBadge();
   },
   async categories(){
     const categories = [
