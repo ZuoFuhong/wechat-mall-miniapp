@@ -1,7 +1,3 @@
-// pages/category/category.js
-
-const WXAPI = require('apifm-wxapi')
-
 Page({
   /**
    * 页面的初始数据
@@ -26,48 +22,77 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    const res = await WXAPI.goodsCategory()
-    wx.hideLoading()
-    let categories = [];
-    let categoryName = '';
-    let categoryId = '';
-    if (res.code == 0) {
-      for (let i = 0; i < res.data.length; i++) {
-        let item = res.data[i];
-        categories.push(item);
-        if (i == 0) {
-          categoryName = item.name;
-          categoryId = item.id;
-        }
+    const categories = [
+      {
+        id: 92642,
+        name: '上装'
+      },
+      {
+        id: 1,
+        name: '上装1'
+      },
+      {
+        id: 2,
+        name: '上装2'
+      },
+      {
+        id: 3,
+        name: '上装3'
+      },{
+        id: 4,
+        name: '上装4'
+      },{
+        id: 5,
+        name: '上装5'
       }
-    }
+    ]
     this.setData({
-      categories: categories,
+      categories,
       categorySelected: {
-        name: categoryName,
-        id: categoryId
+        id: 92642
       }
     });
+    wx.hideLoading()
+
     this.getGoodsList();
   },
   async getGoodsList() {
     wx.showLoading({
       title: '加载中',
     })
-    const res = await WXAPI.goods({
-      categoryId: this.data.categorySelected.id,
-      page: 1,
-      pageSize: 100000
-    })
+
+    /// 加载商品
+    // const res = await WXAPI.goods({
+    //   categoryId: this.data.categorySelected.id,
+    //   page: 1,
+    //   pageSize: 100000
+    // })
+    const goods = [
+      {
+        id: 277082,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 10000.99,
+        saleNum: 10
+      },
+      {
+        id: 277082,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      },
+      {
+        id: 277082,
+        name: '兔毛马甲',
+        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
+        price: 100.99,
+        saleNum: 10
+      }
+    ]
     wx.hideLoading()
-    if (res.code == 700) {
-      this.setData({
-        currentGoods: null
-      });
-      return
-    }
     this.setData({
-      currentGoods: res.data
+      currentGoods: goods
     });
   },
   toDetailsTap: function(e) {

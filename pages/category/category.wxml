@@ -5,7 +5,7 @@
   </view>
   <view class="content-container">
     <scroll-view class="category-container" scroll-y="true" scroll-with-animation="true">
-      <view wx:if="{{category.level == 1}}" class="category {{categorySelected.id==category.id?'active':''}}" wx:for="{{categories}}" wx:for-item="category" wx:key="id" data-id="{{category.id}}" bindtap="onCategoryClick">
+      <view class="category {{categorySelected.id==category.id?'active':''}}" wx:for="{{categories}}" wx:for-item="category" wx:key="id" data-id="{{category.id}}" bindtap="onCategoryClick">
         <view class="name {{categorySelected.id==category.id?'active':''}}">{{category.name}}</view>
       </view>
     </scroll-view>
@@ -34,19 +34,12 @@
       </block>
       
       <view class="goods" wx:for="{{currentGoods}}" wx:key="id" wx:for-item="item" data-id='{{item.id}}' bindtap="toDetailsTap">
-        <image mode="aspectFill" class="pic" src="{{item.pic}}">
-          <!-- <image class='fresh-tag' src="/images/goods-description/fresh.png"></image> -->
-        </image>
+        <image mode="aspectFill" class="pic" src="{{item.picture}}"></image>
         <view class="name ellipsis">{{item.name}}</view>
         <view class='soldInfo'>
           <view class='good-price-box'>
-            <text class="price">¥{{item.minPrice}}</text>
-          </view>
-        </view>
-        <view class='soldInfo'>
-          <view class='good-sales-box'>
-            <text class="number">已售{{item.numberOrders}}件</text>
-            <text>评价{{item.gotScore}}分</text>
+            <view class="price">¥{{item.price}}</view>
+            <view class="saleNum">{{item.saleNum}}人付款</view>
           </view>
         </view>
       </view>

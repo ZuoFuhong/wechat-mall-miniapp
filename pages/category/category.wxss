@@ -13,24 +13,25 @@ page,view,image,input {
 }
 
 .search {
-  margin-top: 32rpx;
-  position: relative;
-  width: 700rpx;
-  height: 66rpx;
+  width: 730rpx;
+  padding: 10rpx 0rpx;
 }
 .search input {
-  border: 1rpx solid #e3e3e3;
-  width: 700rpx;
-  height: 66rpx;
-  border-radius: 30rpx;
-  padding-left: 32rpx; 
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: 60rpx;
+  padding-left: 60rpx;
+  padding-right: 20rpx;
+  font-size: 12px;
+  background-color: #f5f5f5;
 }
 .search image {
-  width: 35rpx;
-  height: 35rpx;
+  width: 30rpx;
+  height: 30rpx;
   position: absolute;
-  top: 16rpx;
-  right: 32rpx;
+  top: 25rpx;
+  left: 28rpx;
 }
 
 .content-container {
@@ -46,8 +47,9 @@ page,view,image,input {
 }
 
 .category-container .category {
-  padding: 30rpx 0rpx;
   text-align: center;
+  border-left: 4rpx solid white;
+  margin-bottom: 40rpx;
 }
 
 .category-container .category.active {
@@ -114,55 +116,35 @@ page,view,image,input {
   color: #000;
   font-size: 28rpx;
   line-height: 46rpx;
-  font-weight: bold;
 }
 
 .goods-container .goods .soldInfo {
-  display: flex;
-  flex-direction: row;
-  width: 350rpx;
   align-items: flex-start;
-  margin-top: 5rpx;
+  margin-top: 20rpx;
+  height: 70rpx;
 }
 
 .goods-container .goods .soldInfo .good-price-box {
   display: flex;
-  flex: 1;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-end;
+  align-items: baseline;
   overflow: hidden;
   font-size: 22rpx;
   line-height: 22rpx;
 }
 
-.goods-container .goods .soldInfo .good-price-box .price {
+.good-price-box .price {
   color: #d81e06;
   margin-top: 10rpx;
-  width: 120rpx;
+  width: 150rpx;
   font-size: 28rpx;
   font-weight: bold;
   line-height: 40rpx;
 }
 
-.goods-container .goods .soldInfo .good-sales-box {
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-end;
-  overflow: hidden;
+.good-price-box .saleNum {
   font-size: 22rpx;
-  line-height: 22rpx;
-}
-
-.goods-container .goods .soldInfo .good-sales-box .number {
-  color: #d81e06;
-  padding: 2px;
-  border: 1px solid #d81e06;
-  border-radius: 5rpx;
+  flex-grow: 1;
+  color: #999999;
 }
 
 .ellipsis {
