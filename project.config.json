@@ -83,6 +83,13 @@
 					"pathName": "pages/category/category",
 					"query": "name=兔毛",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "购物车",
+					"pathName": "pages/shop-cart/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

@@ -13,7 +13,6 @@
     "pages/order/refundApply",
     "pages/wuliu/index",
     "pages/my/index",
-    "pages/sign/index",
     "pages/maidan/index",
     "pages/coupons/index"
   ],
@@ -63,8 +62,6 @@
       "provider": "wx5d60c080635009b1"
     }
   },
-  "usingComponents": {
-    "float-menu": "/components/float-menu/index"
-  },
+  "usingComponents": {},
   "sitemapLocation": "sitemap.json"
 }

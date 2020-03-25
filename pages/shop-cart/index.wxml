@@ -1,9 +1,77 @@
-<!--index.wxml-->
-<import src="../template-cart/template-cart.wxml" />
-
-<view class="container">  
-  <template is="{{shippingCarInfo.items.length > 0 ? 'cart-goods-list' : 'no-goods'}}" data="{{...shippingCarInfo, saveHidden, allSelect, noSelect}}"></template>
+<view class="container">
+  <view class="empty-car" wx:if="{{goodsList.length === 0}}">
+    <image src="/images/icon/empty-car.svg"/>
+    <view class="hint">购物车空空的，去逛逛吧</view>
+    <view class="btn" bindtap="goCategory">去逛逛</view>
+  </view>
+  <view class="goods-list" wx:if="{{goodsList.length > 0}}">
+    <scroll-view scroll-x="true" bindscroll="scroll">
+      <view class="scroll-view_H">
+        <view class="goods">
+          <image src="https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg" />
+          <view class="goods-info">
+            <view class="title">百搭短袖T恤 百搭短袖</view>
+            <view class="specs">黑色；圆领款；M(165)</view>
+            <view class="price">￥ 239</view>
+          </view>
+          <view class="select-btn selected">
+            <image src="/images/icon/selected.svg" />
+          </view>
+          <view class="operation-btn-group">
+            <view class="add">-</view>
+            <view class="num">1</view>
+            <view class="reduce">+</view>
+          </view>
+        </view>
+        <view class="removeBtn">删除</view>
+      </view>
+    </scroll-view>
+    <scroll-view scroll-x="true" bindscroll="scroll">
+      <view class="scroll-view_H">
+        <view class="goods">
+          <image src="https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg" />
+          <view class="goods-info">
+            <view class="title">百搭短袖T恤 百搭短袖</view>
+            <view class="specs">黑色；圆领款；M(165)</view>
+            <view class="price">￥ 239</view>
+          </view>
+          <view class="select-btn selected">
+            <image src="/images/icon/selected.svg" />
+          </view>
+          <view class="operation-btn-group">
+            <view class="add">-</view>
+            <view class="num">1</view>
+            <view class="reduce">+</view>
+          </view>
+        </view>
+        <view class="removeBtn">删除</view>
+      </view>
+    </scroll-view>
+    <scroll-view scroll-x="true" bindscroll="scroll">
+      <view class="scroll-view_H">
+        <view class="goods">
+          <image src="https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg" />
+          <view class="goods-info">
+            <view class="title">百搭短袖T恤 百搭短袖</view>
+            <view class="specs">黑色；圆领款；M(165)</view>
+            <view class="price">￥ 239</view>
+          </view>
+          <view class="select-btn selected">
+            <image src="/images/icon/selected.svg" />
+          </view>
+          <view class="operation-btn-group">
+            <view class="add">-</view>
+            <view class="num">1</view>
+            <view class="reduce">+</view>
+          </view>
+        </view>
+        <view class="removeBtn">删除</view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="settlement" wx:if="{{goodsList.length > 0}}">
+    <view class="selectAll"><view class="select-btn"></view>全选</view>
+    <view class="amount">合计<text>￥127</text></view>
+    <view class="confirm-btn">结算(5)</view>
+  </view>
 </view>
-
-<import src="/template/login/index.wxml" />
-<template is="apifmLogin" data="{{wxlogin: wxlogin}}" />
