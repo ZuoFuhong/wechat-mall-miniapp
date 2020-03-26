@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="14px" viewBox="0 0 21 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>优惠券</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的-未授权" transform="translate(-24.000000, -270.000000)">
+            <g id="优惠券" transform="translate(25.000000, 270.000000)">
+                <path d="M18.5716134,0.448 L18.5710613,3.74776815 C17.2239775,4.18541946 16.2501953,5.45099023 16.2501953,6.944 C16.2501953,8.43700977 17.2239775,9.70258054 18.5710613,10.1402319 L18.5716134,12.992 L0.000268364147,12.992 L0.000465012164,10.2408086 C1.54414586,9.93731378 2.70858952,8.57664209 2.70858952,6.944 C2.70858952,5.31135791 1.54414586,3.95068622 0.000465012164,3.6471914 L0.000268364147,0.448 L18.5716134,0.448 Z" id="形状结合" stroke="#EB405D" stroke-width="0.896"></path>
+                <text id="￥" font-family="PingFangSC-Regular, PingFang SC" font-size="9.856" font-weight="normal" fill="#EB405D">
+                    <tspan x="4.02995236" y="10">￥</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

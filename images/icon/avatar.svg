@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="45px" height="45px" viewBox="0 0 45 45" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>编组</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的-未授权" transform="translate(-14.000000, -80.000000)">
+            <g id="编组" transform="translate(14.000000, 80.000000)">
+                <circle id="椭圆形" fill="#DFA1A1" cx="22.5" cy="22.5" r="22.5"></circle>
+                <circle id="椭圆形" stroke="#FFFFFF" stroke-width="2" cx="22.5" cy="16.2" r="7.2"></circle>
+                <path d="M34.2,36.45 C34.2,30.2367966 29.1632034,25.2 22.95,25.2 C16.7367966,25.2 11.7,30.2367966 11.7,36.45" id="路径" stroke="#FFFFFF" stroke-width="2"></path>
+            </g>
+        </g>
+    </g>
+</svg>

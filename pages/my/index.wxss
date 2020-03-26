@@ -1,0 +1,95 @@
+page {
+  background-color: #f5f5f5;
+}
+.user {
+  background-color: #EB4D50;
+  display: flex;
+  align-items: center;
+  padding: 30rpx 20rpx 100rpx 20rpx;
+}
+.user image {
+  width: 90rpx;
+  height: 90rpx;
+  border-radius: 45rpx;
+}
+.user .info {
+  margin-left: 12rpx;
+  font-size: 24rpx;
+  color: #ffffff;
+}
+.order-panel {
+  position: absolute;
+  top: 150rpx;
+  left: 20rpx;
+  background-color: #ffffff;
+  border: 8rpx;
+  padding: 20rpx;
+  width: 670rpx;
+  border-radius: 16rpx;
+}
+.order-panel .top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-right: 10rpx;
+}
+.order-panel .top .title {
+  font-size: 24rpx;
+  font-weight: bold;
+}
+.top .more {
+  font-size: 24rpx;
+  color: #666666;
+}
+.more image {
+  width: 20rpx;
+  height: 20rpx;
+}
+.order-btn-panel {
+  border: 16rpx;
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  padding: 0rpx 20rpx 0;
+  margin-top: 40rpx;
+}
+.order-btn-panel .btn-item {
+  width: 100rpx;
+  height: 100rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: #666666;
+}
+.btn-item image {
+  height: 55rpx;
+  width: 55rpx;
+}
+.other-panel {
+  border-radius: 16rpx;
+  margin: 165rpx 20rpx 0;
+  background-color: #ffffff;
+  padding: 0 10rpx 0 30rpx;
+}
+.other-panel .tab-item {
+  height: 100rpx;
+  border-bottom: 1px solid #f5f5f5;
+  display: flex;
+  align-items: center;
+  font-size: 24rpx;
+  position: relative;
+}
+.other-panel .next-level {
+  width: 25rpx;
+  height: 25rpx;
+  position: absolute;
+  right: 20rpx;
+}
+.tab-item image {
+  width: 45rpx;
+  height: 45rpx;
+}
+.tab-item .name {
+  margin-left: 20rpx;
+}

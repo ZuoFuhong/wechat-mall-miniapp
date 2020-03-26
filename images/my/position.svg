@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="22px" viewBox="0 0 19 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>编组</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的-未授权" transform="translate(-21.000000, -311.000000)" stroke="#EB405D">
+            <g id="编组" transform="translate(22.000000, 312.000000)">
+                <path d="M8.8,0 C11.8927946,0 14.4,2.56093123 14.4,5.72 C14.4,6.85446277 14.0766653,7.91178843 13.5189899,8.80107607 L13.5384615,8.8 L8.8,17.6 L4.06153846,8.8 L4.08101007,8.80107607 C3.52333465,7.91178843 3.2,6.85446277 3.2,5.72 C3.2,2.56093123 5.7072054,0 8.8,0 Z" id="形状结合" stroke-width="0.64" stroke-linejoin="round"></path>
+                <circle id="椭圆形" stroke-width="0.64" cx="8.8" cy="5.6" r="4"></circle>
+                <path d="M13.6663083,15.2 C16.0373447,15.6690665 17.6,16.4711364 17.6,17.3817957 C17.6,18.82779 13.6601058,20 8.8,20 C3.9398942,20 0,18.82779 0,17.3817957 C0,16.4711364 1.5626553,15.6690665 3.93369172,15.2" id="路径" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>

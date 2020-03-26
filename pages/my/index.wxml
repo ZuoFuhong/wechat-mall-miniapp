@@ -1,1 +1,50 @@
-<view>我的</view>
+<view>
+  <view class="user">
+    <image src="/images/icon/avatar.svg" />
+    <view class="info">
+      <view class="nickname">大左</view>
+      <view class="phone">188****2140</view>
+    </view>
+  </view>
+  <view class="order-panel">
+    <view class="top">
+      <view class="title">我的订单</view>
+      <view class="more">查看全部 <image src="/images/icon/next-level.svg" /></view>
+    </view>
+    <view class="order-btn-panel">
+      <view class="btn-item">
+        <image src="/images/my/wait-pay.svg" />
+        <view>待付款</view>
+      </view>
+      <view class="btn-item">
+        <image style="width:62rpx;height:62rpx;" src="/images/my/wait-send.svg" />
+        <view>待发货</view>
+      </view>
+      <view class="btn-item">
+        <image src="/images/my/wait-receive.svg" />
+        <view>待收货</view>
+      </view>
+      <view class="btn-item">
+        <image src="/images/my/order-finish.svg" />
+        <view>已完成</view>
+      </view>
+    </view>
+  </view>
+  <view class="other-panel">
+    <view class="tab-item" bindtap="goMyCoupon">
+      <image src="/images/my/coupon.svg" />
+      <view class="name">我的优惠券</view>
+      <image class="next-level" src="/images/icon/next-level.svg" />
+    </view>
+    <view class="tab-item">
+      <image src="/images/my/position.svg" />
+      <view class="name">我的收货地址</view>
+      <image class="next-level" src="/images/icon/next-level.svg" />
+    </view>
+    <view class="tab-item">
+      <image src="/images/my/foot.svg" />
+      <view class="name">历史浏览</view>
+      <image class="next-level" src="/images/icon/next-level.svg" />
+    </view>
+  </view>
+</view>

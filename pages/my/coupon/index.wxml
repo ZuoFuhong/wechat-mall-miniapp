@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="nav-tab">
+    <view class="tab-item">
+      <view class="name">未使用</view>
+      <view class="border"></view>
+    </view>
+    <view class="tab-item checked">
+      <view class="name">已使用</view>
+      <view class="border checked"></view>
+    </view>
+    <view class="tab-item">
+      <view class="name">已过期</view>
+      <view class="border"></view>
+    </view>
+  </view>
+  <view class="coupons">
+    <view class="coupon">
+      <image class="bg-image" src="/images/coupon/coupon-bg.svg" />
+      <view class="amount">￥ 180 <text>满1590减180</text></view>
+      <view class="use-scope">全场所有商品通用</view>
+      <view class="take-btn">
+        <view>立即</view>
+        <view>领券</view>
+      </view>
+      <view class="deadline">6/30-7/31</view>
+    </view>
+    <view class="coupon">
+      <image class="bg-image" src="/images/coupon/coupon-bg.svg" />
+      <view class="amount">￥ 180 <text>满1590减180</text></view>
+      <view class="use-scope">全场所有商品通用</view>
+      <view class="take-btn">
+        <view>立即</view>
+        <view>领券</view>
+      </view>
+      <view class="deadline">6/30-7/31</view>
+    </view>
+  </view>
+</view>

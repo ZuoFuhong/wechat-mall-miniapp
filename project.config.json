@@ -90,6 +90,20 @@
 					"pathName": "pages/shop-cart/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/my/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的优惠券",
+					"pathName": "pages/my/coupon/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
