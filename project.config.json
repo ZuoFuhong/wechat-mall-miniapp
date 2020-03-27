@@ -104,6 +104,20 @@
 					"pathName": "pages/my/coupon/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的订单",
+					"pathName": "pages/order/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单详情",
+					"pathName": "pages/order-details/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

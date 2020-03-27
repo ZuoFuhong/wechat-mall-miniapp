@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="nav-tab">
+    <view class="tab-item">
+      <view class="name">全部</view>
+      <view class="border"></view>
+    </view>
+    <view class="tab-item checked">
+      <view class="name">待付款</view>
+      <view class="border checked"></view>
+    </view>
+    <view class="tab-item">
+      <view class="name">待发货</view>
+      <view class="border"></view>
+    </view>
+    <view class="tab-item">
+      <view class="name">待收货</view>
+      <view class="border"></view>
+    </view>
+    <view class="tab-item">
+      <view class="name">已完成</view>
+      <view class="border"></view>
+    </view>
+  </view>
+  <view class="empty-order" wx:if="{{orderList.length === 0}}">
+    <image src="/images/order/order-empty.svg" />
+    <view class="hint">暂无相关订单</view>
+  </view>
+  <view class="order-list" wx:if="{{orderList.length > 0}}">
+    <view class="order-item" wx:for="{{orderList}}">
+      <navigator url="/pages/order-details/index?id={{item.id}}">
+        <view class="top">
+          <view class="order-no">订单编号：{{item.orderNo}}</view>
+          <!-- 状态组 -->
+          <view class="finish">已完成</view>
+        </view>
+        <view class="goods-list">
+          <view class="goods" wx:for="{{item.goodsList}}" wx:for-item="goodsItem">
+            <image src="{{goodsItem.picture}}" />
+            <view class="info">
+              <view class="title">{{goodsItem.title}}</view>
+              <view class="specs">{{goodsItem.specs}}</view>
+            </view>
+            <view class="amount">
+              <view class="price">￥{{goodsItem.price}}</view>
+              <view class="num">x {{goodsItem.num}}</view>
+            </view>
+          </view>
+        </view>
+      </navigator>
+      <view class="bottom">
+        <view class="goods-num">共{{item.goodsNum}}件商品<text style="margin-left: 20rpx;">实付 <text class="amount">￥{{item.payAmount}}</text></text></view>
+        <view class="btn-group">
+          <view class="btn orderPay" data-orderno="{{item.orderNo}}" bindtap="orderPay">付款</view>
+          <view class="btn delete" data-orderno="{{item.orderNo}}" bindtap="deleteOrder">删除订单</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

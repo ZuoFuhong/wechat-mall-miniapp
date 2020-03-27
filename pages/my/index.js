@@ -4,9 +4,15 @@ Page({
   },
   
   goMyCoupon() {
-    console.log('我的优惠券')
     wx.navigateTo({
       url: "/pages/my/coupon/index"
+    })
+  },
+
+  goMyOrder(event) {
+    const status = event.currentTarget.dataset.id
+    wx.navigateTo({
+      url: '/pages/order/index?status=' + status
     })
   }
 })

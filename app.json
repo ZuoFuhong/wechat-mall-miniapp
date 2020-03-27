@@ -7,7 +7,9 @@
     "pages/shop-cart/index",
     "pages/my/index",
     "pages/coupons/index",
-    "pages/my/coupon/index"
+    "pages/my/coupon/index",
+    "pages/order/index",
+    "pages/order-details/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

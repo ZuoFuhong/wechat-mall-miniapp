@@ -56,7 +56,7 @@ scroll-view {
   height: 180rpx;
 }
 .goods .goods-info {
-  width: 510rpx;
+  width: 400rpx;
   margin-left: 20rpx;
 }
 .goods-info .title {
@@ -117,7 +117,7 @@ scroll-view {
   height: 40rpx;
   text-align: center;
   line-height: 36rpx;
-  font-size: 28rpx;
+  font-size: 34rpx;
   font-weight: bold;
 }
 .operation-btn-group .add:active,.reduce:active {
@@ -155,4 +155,8 @@ scroll-view {
   height: 90rpx;
   line-height: 90rpx;
   text-align: center;
+}
+.navigator-hover {
+  background-color: #ffffff;
+  opacity: 1
 }

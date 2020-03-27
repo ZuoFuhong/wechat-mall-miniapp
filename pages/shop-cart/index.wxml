@@ -5,63 +5,23 @@
     <view class="btn" bindtap="goCategory">去逛逛</view>
   </view>
   <view class="goods-list" wx:if="{{goodsList.length > 0}}">
-    <scroll-view scroll-x="true" bindscroll="scroll">
+    <scroll-view scroll-x="true" bindscroll="scroll" wx:for="{{goodsList}}">
       <view class="scroll-view_H">
         <view class="goods">
-          <image src="https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg" />
+          <image src="{{item.picture}}" />
           <view class="goods-info">
-            <view class="title">百搭短袖T恤 百搭短袖</view>
-            <view class="specs">黑色；圆领款；M(165)</view>
-            <view class="price">￥ 239</view>
+            <navigator url="/pages/goods-details/index?id=1">
+              <view class="title">{{item.title}}</view>
+              <view class="specs">{{item.specs}}</view>
+            </navigator>
+            <view class="price">￥ {{item.price}}</view>
           </view>
           <view class="select-btn selected">
             <image src="/images/icon/selected.svg" />
           </view>
           <view class="operation-btn-group">
             <view class="add">-</view>
-            <view class="num">1</view>
-            <view class="reduce">+</view>
-          </view>
-        </view>
-        <view class="removeBtn">删除</view>
-      </view>
-    </scroll-view>
-    <scroll-view scroll-x="true" bindscroll="scroll">
-      <view class="scroll-view_H">
-        <view class="goods">
-          <image src="https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg" />
-          <view class="goods-info">
-            <view class="title">百搭短袖T恤 百搭短袖</view>
-            <view class="specs">黑色；圆领款；M(165)</view>
-            <view class="price">￥ 239</view>
-          </view>
-          <view class="select-btn selected">
-            <image src="/images/icon/selected.svg" />
-          </view>
-          <view class="operation-btn-group">
-            <view class="add">-</view>
-            <view class="num">1</view>
-            <view class="reduce">+</view>
-          </view>
-        </view>
-        <view class="removeBtn">删除</view>
-      </view>
-    </scroll-view>
-    <scroll-view scroll-x="true" bindscroll="scroll">
-      <view class="scroll-view_H">
-        <view class="goods">
-          <image src="https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg" />
-          <view class="goods-info">
-            <view class="title">百搭短袖T恤 百搭短袖</view>
-            <view class="specs">黑色；圆领款；M(165)</view>
-            <view class="price">￥ 239</view>
-          </view>
-          <view class="select-btn selected">
-            <image src="/images/icon/selected.svg" />
-          </view>
-          <view class="operation-btn-group">
-            <view class="add">-</view>
-            <view class="num">1</view>
+            <view class="num">{{item.num}}</view>
             <view class="reduce">+</view>
           </view>
         </view>

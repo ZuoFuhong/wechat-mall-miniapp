@@ -5,6 +5,7 @@ page {
   width: 100%;
 }
 .nav-tab {
+  margin-top: 1px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -23,9 +24,10 @@ page {
 }
 .tab-item .border {
   border: none;
-  width: 30rpx;
+  width: 40rpx;
   height: 1.5px;
   background-color: white;
+  border-radius: 1px;
 }
 .nav-tab .checked {
   color: #EB4D50;

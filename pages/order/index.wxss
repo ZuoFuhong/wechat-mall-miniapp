@@ -1,0 +1,147 @@
+page {
+  background-color: #f5f5f5;
+}
+.container {
+  width: 100%;
+}
+.nav-tab {
+  margin-top: 1px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+}
+.tab-item {
+  width: 150rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+  line-height: 70rpx;
+  text-align: center;
+  color: #666666;
+}
+.tab-item .border {
+  border: none;
+  width: 40rpx;
+  height: 1.5px;
+  background-color: white;
+  border-radius: 1px;
+}
+.nav-tab .checked {
+  color: #EB4D50;
+}
+.tab-item .checked {
+  background-color: #EB4D50;
+}
+.empty-order {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 200rpx;
+  font-size: 24rpx;
+}
+.empty-order image {
+  width: 140rpx;
+  height: 140rpx;
+}
+.empty-order .hint {
+  margin-top: 20rpx;
+}
+.order-list {
+  margin-top: 20rpx;
+  width: 710rpx;
+}
+.order-item {
+  margin-bottom: 20rpx;
+  background-color: #ffffff;
+}
+.order-item .top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  line-height: 70rpx;
+  height: 70rpx;
+  padding: 0 20rpx;
+}
+.top .order-no {
+  color: #999999;
+}
+.top .finish {
+  color: #EB405D;
+}
+.goods-list .goods {
+  border-top: 1px solid #F7F7F7;
+  display: flex;
+  padding: 20rpx
+}
+.goods image {
+  width: 120rpx;
+  height: 120rpx;
+}
+.goods .info {
+  font-size: 24rpx;
+  width: 380rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left: 20rpx;
+}
+.info .specs {
+  display: inline;
+  background-color: #F3F3F3;
+  padding: 5rpx 10rpx;
+  font-size: 22rpx;
+  color: #999999;
+}
+.goods .amount {
+  flex-grow: 1;
+  font-size: 24rpx;
+  text-align: right;
+}
+.amount .price {
+  font-weight: bold;
+}
+.amount .num {
+  color: #999999;
+}
+.order-item .bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+  padding: 20rpx;
+  color: #666666;
+  border-top: 1px solid #F7F7F7;
+}
+.bottom .goods-num {
+  width: 340rpx;
+}
+.bottom .amount {
+  color: black;
+  font-size: 28rpx;
+  font-weight: bold;
+}
+.bottom .btn-group {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-group .btn {
+  border: 1px solid #666666;
+  padding: 5rpx 15rpx;
+  display: inline-block;
+  margin-left: 15rpx;
+}
+.orderPay {
+  border: 1px solid #EB405D !important;
+  color: #EB405D;
+}
+.navigator-hover {
+  background-color: #ffffff;
+  opacity: 1
+}

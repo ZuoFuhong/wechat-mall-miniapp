@@ -9,22 +9,22 @@
   <view class="order-panel">
     <view class="top">
       <view class="title">我的订单</view>
-      <view class="more">查看全部 <image src="/images/icon/next-level.svg" /></view>
+      <view class="more" bindtap="goMyOrder">查看全部 <image src="/images/icon/next-level.svg" /></view>
     </view>
     <view class="order-btn-panel">
-      <view class="btn-item">
+      <view class="btn-item" data-id="0" bindtap="goMyOrder">
         <image src="/images/my/wait-pay.svg" />
         <view>待付款</view>
       </view>
-      <view class="btn-item">
+      <view class="btn-item" data-id="1" bindtap="goMyOrder">
         <image style="width:62rpx;height:62rpx;" src="/images/my/wait-send.svg" />
         <view>待发货</view>
       </view>
-      <view class="btn-item">
+      <view class="btn-item" data-id="2" bindtap="goMyOrder">
         <image src="/images/my/wait-receive.svg" />
         <view>待收货</view>
       </view>
-      <view class="btn-item">
+      <view class="btn-item" data-id="3" bindtap="goMyOrder">
         <image src="/images/my/order-finish.svg" />
         <view>已完成</view>
       </view>
