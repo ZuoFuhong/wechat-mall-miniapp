@@ -13,7 +13,7 @@
         <view class="goods">
           <image src="{{item.picture}}" />
           <view class="info">
-            <view class="title">{{item.title}}</view>
+            <view class="name">{{item.title}}</view>
             <view class="specs">{{item.specs}}</view>
           </view>
           <view class="amount">
@@ -54,7 +54,53 @@
     <view class="order-item">成交时间：2020-03-27 12:30:49</view>
   </view>
   <view class="btn-group">
-    <view class="btn">退款</view>
+    <view class="btn" bindtap="refund">退款</view>
     <view class="btn">删除订单</view>
+  </view>
+</view>
+<view class="shade" wx:if="{{refundPopup}}" bindtap="closePopup">
+  <view class="refound-reason" catchtap="stopPropagation">
+    <view class="title">退款原因</view>
+    <view class="reason">
+      <view class="item">
+        <view>订单信息拍错（规格/尺码/颜色等）</view>
+        <view wx:if="{{selectReason !== 1}}" class="radio" data-id="1" catchtap="selectReason"></view>
+        <view wx:if="{{selectReason === 1}}" class="radio checked" data-id="1" catchtap="selectReason">
+          <image src="/images/order/tick.svg" />
+        </view>
+      </view>
+      <view class="item">
+        <view>我不想要了</view>
+        <view wx:if="{{selectReason !== 2}}" class="radio" data-id="2" catchtap="selectReason"></view>
+        <view wx:if="{{selectReason === 2}}" class="radio checked" data-id="2" catchtap="selectReason">
+          <image src="/images/order/tick.svg" />
+        </view>
+      </view>
+      <view class="item">
+        <view>地址/电话信息填写错误</view>
+        <view wx:if="{{selectReason !== 3}}" class="radio" data-id="3" catchtap="selectReason"></view>
+        <view wx:if="{{selectReason === 3}}" class="radio checked" data-id="3" catchtap="selectReason">
+          <image src="/images/order/tick.svg" />
+        </view>
+      </view>
+      <view class="item">
+        <view>没用/少用优惠</view>
+        <view wx:if="{{selectReason !== 4}}" class="radio" data-id="4" catchtap="selectReason"></view>
+        <view wx:if="{{selectReason === 4}}" class="radio checked" data-id="4" catchtap="selectReason">
+          <image src="/images/order/tick.svg" />
+        </view>
+      </view>
+      <view class="item">
+        <view>缺货</view>
+        <view wx:if="{{selectReason !== 5}}" class="radio" data-id="5" catchtap="selectReason"></view>
+        <view wx:if="{{selectReason === 5}}" class="radio checked" data-id="5" catchtap="selectReason">
+          <image src="/images/order/tick.svg" />
+        </view>
+      </view>
+    </view>
+    <view class="btn-group">
+      <view class="confirmBtn" catchtap="confirmRefund">确定</view>
+      <view class="closeBtn" catchtap="closePopup">取消</view>
+    </view>
   </view>
 </view>

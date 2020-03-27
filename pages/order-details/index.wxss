@@ -123,13 +123,72 @@ page {
 }
 .btn-group .btn {
   border: 1px solid #666666;
-  padding: 5rpx 15rpx;
+  padding: 5rpx 20rpx;
   display: inline-block;
   color: #666666;
   font-size: 24rpx;
-  margin-right: 20rpx;
+  margin-right: 30rpx;
 }
 .navigator-hover {
   background-color: #ffffff;
   opacity: 1
+}
+.shade {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.refound-reason {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #ffffff;
+  font-size: 24rpx;
+}
+.refound-reason .title {
+  font-size: 28rpx;
+  text-align: center;
+  padding: 20rpx;
+}
+.refound-reason .reason {
+  padding: 0 20rpx 200rpx;
+}
+.reason .item {
+  height: 80rpx;
+  line-height: 80rpx;
+  border-bottom: 1px solid #F5F5F5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.item .radio {
+  width: 40rpx;
+  height: 40rpx;
+  border: 1px solid #D8D8D8;
+  border-radius: 40rpx;
+  margin-right: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.item .checked {
+  border-color: #EB405D;
+}
+.radio image {
+  width: 24rpx;
+  height: 24rpx;
+}
+.closeBtn,.confirmBtn {
+  width: 50%;
+  height: 80rpx;
+  color: #ffffff;
+  background-color: #EB4D50;
+  text-align: center;
+  line-height: 80rpx;
+}
+.closeBtn {
+  background-color: black;
+  color: #ffffff;
 }

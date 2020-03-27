@@ -1,0 +1,45 @@
+<view class="refund-detail">
+  <view class="top">
+    <view class="status">请等待商家处理</view>
+    <view class="time">还剩23时59分59秒</view>
+  </view>
+  <view class="hint">
+    <view class="main">您已成功发起退款申请，请耐心等待商家处理</view>
+    <view class="item">· 商家同意或超时未处理，系统将退款给您。</view>
+    <view class="btn-group">
+      <view class="item-btn" bindtap="cancelApply">撤销申情</view>
+    </view>
+  </view>
+  <view class="goods-info">
+    <view class="title">退款信息</view>
+    <view class="goods-list">
+      <navigator wx:for="{{goodsList}}" url="/pages/goods-details/index?id={{item.goodsId}}">
+        <view class="goods">
+          <image src="{{item.picture}}" />
+          <view class="info">
+            <view class="name">{{item.title}}</view>
+            <view class="specs">{{item.specs}}</view>
+          </view>
+          <!-- <view class="amount">
+            <view class="price">￥{{item.price}}</view>
+            <view class="num">x {{item.num}}</view>
+          </view> -->
+        </view>
+      </navigator>
+    </view>
+    <view class="cast-detail">
+      <view class="cost-item">
+        <view>退款原因：错拍不想要</view>
+      </view>
+      <view class="cost-item">
+        <view>退款金额：￥ 239.90</view>
+      </view>
+      <view class="cost-item">
+        <view>申请时间：2020-03-27 12:39:22</view>
+      </view>
+      <view class="cost-item actual">
+        <view>退款编号：2388897979724</view>
+      </view>
+    </view>
+  </view>
+</view>

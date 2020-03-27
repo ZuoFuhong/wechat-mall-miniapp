@@ -118,6 +118,13 @@
 					"pathName": "pages/order-details/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "退款详情",
+					"pathName": "pages/refund-details/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}
