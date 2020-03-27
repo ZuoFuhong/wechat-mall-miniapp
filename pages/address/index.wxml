@@ -1,0 +1,31 @@
+<view class="empty" wx:if="{{addressList.length === 0}}">
+  <view class="empty-l"></view>
+  <view>没有数据</view>
+  <view class="empty-r"></view>
+</view>
+<view class="address-list" wx:if="{{addressList.length !== 0}}">
+  <view class="address" wx:for="{{addressList}}">
+    <view>{{item.nickname}}<text class="phone">{{item.mobile}}</text></view>
+    <view class="detail">{{item.detail}}</view>
+    <view class="default">
+      <view class="l">
+        <view class="radio" wx:if="{{item.isDefault === 0}}"></view>
+        <view class="radio checked" wx:if="{{item.isDefault === 1}}">
+          <image src="/images/order/tick.svg" />
+        </view>
+        <view class="desc">设为默认地址</view>
+      </view>
+      <view class="r">
+        <view class="btn-item" data-id="{{item.id}}" bindtap="editAddress">
+          <image src="/images/address/edit.svg" />
+          <view>编辑</view>
+        </view>
+        <view class="btn-item" data-id="{{item.id}}" bindtap="deleteAddress">
+          <image src="/images/address/trash.svg" />
+          <view>删除</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view class="add-btn" bindtap="addAddress">添加收货地址</view>

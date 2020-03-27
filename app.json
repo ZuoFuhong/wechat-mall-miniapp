@@ -10,7 +10,10 @@
     "pages/my/coupon/index",
     "pages/order/index",
     "pages/order-details/index",
-    "pages/refund-details/index"
+    "pages/refund-details/index",
+    "pages/address/index",
+    "pages/address/edit/index",
+    "pages/browse/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

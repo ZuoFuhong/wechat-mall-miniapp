@@ -14,5 +14,17 @@ Page({
     wx.navigateTo({
       url: '/pages/order/index?status=' + status
     })
+  },
+
+  goMyAddress() {
+    wx.navigateTo({
+      url: '/pages/address/index'
+    })
+  },
+
+  goMyBrowse() {
+    wx.navigateTo({
+      url: '/pages/browse/index'
+    })
   }
 })

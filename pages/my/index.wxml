@@ -36,12 +36,12 @@
       <view class="name">我的优惠券</view>
       <image class="next-level" src="/images/icon/next-level.svg" />
     </view>
-    <view class="tab-item">
+    <view class="tab-item" bindtap="goMyAddress">
       <image src="/images/my/position.svg" />
       <view class="name">我的收货地址</view>
       <image class="next-level" src="/images/icon/next-level.svg" />
     </view>
-    <view class="tab-item">
+    <view class="tab-item" bindtap="goMyBrowse">
       <image src="/images/my/foot.svg" />
       <view class="name">历史浏览</view>
       <image class="next-level" src="/images/icon/next-level.svg" />

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="13px" height="12px" viewBox="0 0 13 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>编组</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="收货地址（列表）" transform="translate(-272.000000, -128.000000)" stroke="#979797" stroke-width="0.6">
+            <g id="单个收货地址" transform="translate(0.000000, 68.000000)">
+                <g id="编组" transform="translate(272.000000, 60.000000)">
+                    <polyline id="路径-27" points="0.3 2.75146131 0.3 10.9672725 10.3501271 10.9672725 10.3501271 4.01246966"></polyline>
+                    <path d="" id="路径-28"></path>
+                    <line x1="0.3" y1="2.75146131" x2="6.88673782" y2="2.75146131" id="路径-29"></line>
+                    <polygon id="路径-30" points="4.52697091 6.85936691 4.52697091 8.15123494 6.23460616 7.50530092 12.0001138 1.25146131 10.7761963 2.26242218e-16 9.87298959 0.991391033"></polygon>
+                    <line x1="10.8715664" y1="2.4" x2="9.9" y2="1.5" id="路径-31"></line>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

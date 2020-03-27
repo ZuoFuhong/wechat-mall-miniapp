@@ -1,0 +1,33 @@
+<view class="edit-address">
+  <view class="item">
+    <view class="l">收件人</view>
+    <view class="r">
+      <input placeholder="请填写收件人"/>
+    </view>
+  </view>
+  <view class="item">
+    <view class="l">联系电话</view>
+    <view class="r">
+      <input placeholder="请填写联系电话"/>
+    </view>
+  </view>
+  <view class="item">
+    <view class="l">所在地区</view>
+    <view class="r">
+       <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+          <view class="picker">
+            {{region[0]}}/{{region[1]}}/{{region[2]}}
+          </view>
+        </picker>
+    </view>
+  </view>
+  <view class=""></view>
+  <view class="item">
+    <view class="l">详细地址</view>
+    <view class="r">
+      <input placeholder="请填写详细地址"/>
+    </view>
+  </view>
+</view>
+
+<view class="save-btn" bindtap="saveAddress">保存地址</view>

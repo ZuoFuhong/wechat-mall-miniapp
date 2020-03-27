@@ -125,6 +125,19 @@
 					"pathName": "pages/refund-details/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "收货地址",
+					"pathName": "pages/address/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "编辑收货地址",
+					"pathName": "pages/address/edit/index",
+					"scene": null
 				}
 			]
 		}
