@@ -137,6 +137,13 @@
 					"id": -1,
 					"name": "编辑收货地址",
 					"pathName": "pages/address/edit/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "浏览历史",
+					"pathName": "pages/browse/index",
 					"scene": null
 				}
 			]

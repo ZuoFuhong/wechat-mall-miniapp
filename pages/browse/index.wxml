@@ -1,1 +1,36 @@
-<view>浏览历史</view>
+<view class="empty" wx:if="{{list.length === 0}}">
+  <view class="empty-l"></view>
+  <view>最近没有浏览过商品</view>
+  <view class="empty-r"></view>
+</view>
+<view class="browse" wx:if="{{list.length !== 0}}">
+  <view class="manager">
+    <view class="btn" bindtap="close" wx:if="{{editStatus}}">完成</view>
+    <view class="btn" bindtap="edit" wx:if="{{!editStatus}}">管理</view>
+  </view>
+  <view class="item" wx:for="{{list}}">
+    <view class="date">{{item.date}}</view>
+    <view class="list">
+      <view class="goods-item" wx:for="{{item.goodsList}}" wx:for-item="goodsItem">
+        <view class="radio" wx:if="{{editStatus}}"></view>
+        <navigator wx:key="id" url="/pages/goods-details/index?id={{goodsItem.id}}">
+          <image class="img" mode="aspectFill" src="{{goodsItem.picture}}"></image>
+          <view class="goods-info">
+            <view class="title">{{goodsItem.name}}</view>
+            <view class="bottom">
+              <view class="price">¥ {{goodsItem.price}}</view>
+              <view class="saleNum"> {{goodsItem.saleNum}}人付款</view>
+            </view>
+          </view>
+        </navigator>
+      </view>
+    </view>
+  </view>
+  <view class="operation" wx:if="{{editStatus}}">
+    <view class="l">
+      <view class="radio"></view>
+      <view>全选</view>
+    </view>
+    <view class="delete-btn">删除</view>
+  </view>
+</view>
