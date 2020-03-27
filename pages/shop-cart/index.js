@@ -28,9 +28,7 @@ Page({
     ]
   },
   onLoad() {
-    this.setData({
-      goodsList: []
-    })
+    
   },
   goCategory() {
     wx.reLaunch({
