@@ -50,6 +50,7 @@ page {
 }
 .empty-order .hint {
   margin-top: 20rpx;
+  color: #979797;
 }
 .order-list {
   margin-top: 20rpx;

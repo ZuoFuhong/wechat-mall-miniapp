@@ -27,6 +27,11 @@ Page({
       }
     ]
   },
+  onLoad() {
+    this.setData({
+      goodsList: []
+    })
+  },
   goCategory() {
     wx.reLaunch({
       url: "/pages/category/category"

@@ -3,7 +3,6 @@ const SelectSizePrefix = "选择："
 
 Page({
   data: {
-    wxlogin: true,
     // 商品-图片
     multipePicture: [
       {
@@ -50,6 +49,7 @@ Page({
         }
     ],
     goodsDetail: {
+      id: 1,
       content: "<p><img class=\"img-ks-lazyload\" src=\"https://img.alicdn.com/imgextra/i2/4134225718/O1CN011s6tA01sL8d3mKD_!!4134225718.jpg\" width=\"790\" align=\"absmiddle\" /><img class=\"img-ks-lazyload\" src=\"https://img.alicdn.com/imgextra/i3/4134225718/O1CN011s6tA1VUrpntRXW_!!4134225718.jpg\" width=\"790\" align=\"absmiddle\" /><img class=\"img-ks-lazyload\" src=\"https://img.alicdn.com/imgextra/i4/4134225718/O1CN011s6tA2H1g9yk8i2_!!4134225718.jpg\" width=\"790\" align=\"absmiddle\" data-spm-anchor-id=\"a220o.1000855.0.i2.591c48abotbO5M\" /></p>"
     },
     hasMoreSelect: false,

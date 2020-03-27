@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="80px" height="80px" viewBox="0 0 80 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>编组</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="商品详情（商品不存在）" transform="translate(-140.000000, -158.000000)">
+            <g id="编组" transform="translate(140.000000, 158.000000)">
+                <circle id="椭圆形" fill="#D8D8D8" cx="40" cy="40" r="40"></circle>
+                <path d="M23.286791,16.1538462 L53.2337523,16.1538462 C60.3086867,23.1769883 63.8461538,28.425364 63.8461538,31.8989732 C63.8461538,37.109387 61.219966,43.5441006 48.6335828,35.11633 C43.2119075,44.2751682 31.3620831,38.3336868 31.3620831,35.11633 C27.2779451,42.0865358 16.1538462,41.0891675 16.1538462,32.9524445 C16.1538462,27.5279625 18.5314944,21.9284297 23.286791,16.1538462 Z" id="路径-19" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></path>
+                <line x1="23.8461538" y1="28.0769231" x2="56.9230769" y2="28.0769231" id="路径-20" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"></line>
+                <polyline id="路径-21" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" points="20 45 20 60 60.7692308 60 60.7692308 45"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

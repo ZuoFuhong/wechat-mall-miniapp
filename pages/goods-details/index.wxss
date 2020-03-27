@@ -1,6 +1,20 @@
-@import "/template/share/index.wxss";
-@import "/template/login/index.wxss";
-
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 200rpx;
+  font-size: 24rpx;
+}
+.not-found image {
+  width: 140rpx;
+  height: 140rpx;
+}
+.not-found .hint {
+  margin-top: 20rpx;
+  color: #979797;
+}
 .container {
   background-color: #F2f2f2;
   min-height: 100%;

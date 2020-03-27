@@ -18,12 +18,13 @@ page {
 }
 .empty-car .hint {
   margin-top: 20rpx;
-  font-size: 28rpx;
+  font-size: 24rpx;
+  color: #979797;
 }
 .empty-car .btn {
   margin-top: 20rpx;
   font-size: 24rpx;
-  width: 160rpx;
+  width: 140rpx;
   text-align: center;
   padding: 15rpx;
   color: white;

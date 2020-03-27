@@ -1,4 +1,8 @@
-<view class="container">
+<view class="not-found" wx:if="{{!goodsDetail.id}}">
+  <image src="/images/goods/not-found.svg" />
+  <view class="hint">商品下架不存在</view>
+</view>
+<view class="container" wx:if="{{goodsDetail.id}}">
   <view class="swiper-container">
     <swiper class="swiper_box" indicator-dots="true" indicator-active-color="#fff" autoplay circular>
       <swiper-item wx:for="{{multipePicture}}" wx:key="id">
