@@ -1,9 +1,9 @@
 <view>
   <view class="user">
-    <image src="{{authStatus ? userInfo.avatar : '/images/icon/avatar.svg'}}" />
+    <image src="{{userInfo.avatar || '/images/icon/avatar.svg'}}" />
     <view class="info">
-      <view wx:if="{{!authStatus}}" bindtap="doAuthInfo">未授权</view>
-      <view class="nickname">{{userInfo.nickname}}</view>
+      <button class="auth" wx:if="{{!userInfo.avatar}}" open-type="getUserInfo" bindgetuserinfo="doAuthInfo">未授权</button>
+      <view class="nickname">{{userInfo.nickName}}</view>
       <view class="phone">{{userInfo.mobile}}</view>
     </view>
   </view>

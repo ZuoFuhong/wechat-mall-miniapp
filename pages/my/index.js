@@ -1,7 +1,6 @@
 import user from '../../models/user'
 Page({
 	data: {
-    authStatus: false,
     userInfo: {}
   },
   async onLoad() {
@@ -9,18 +8,32 @@ Page({
   },
   async getUserInfo () {
     const res = await user.getUserInfo()
-    let { error_code, msg } = res // eslint-disable-line
+    let { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
     } else {
       this.setData({
-        authStatus: res.nickname !== undefined,
         userInfo: res
       })
     }
   },
-  doAuthInfo() {
-    console.log('授权操作')
+  // 主动授权用户信息
+  async doAuthInfo(res) {
+    const userInfo = res.detail.userInfo
+    if (userInfo) {
+      const result = await user.updateUserInfo(userInfo)
+      let { error_code, msg } = result
+      if (error_code !== undefined) {
+        console.log(msg)
+      } else {
+        const originInfo = this.data.userInfo
+        originInfo.nickName = userInfo.nickName
+        originInfo.avatar = userInfo.avatarUrl
+        this.setData({
+          userInfo: originInfo
+        })
+      }
+    }
   },
   goMyCoupon() {
     wx.navigateTo({
