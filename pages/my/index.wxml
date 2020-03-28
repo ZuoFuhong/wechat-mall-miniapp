@@ -1,9 +1,10 @@
 <view>
   <view class="user">
-    <image src="/images/icon/avatar.svg" />
+    <image src="{{authStatus ? userInfo.avatar : '/images/icon/avatar.svg'}}" />
     <view class="info">
-      <view class="nickname">大左</view>
-      <view class="phone">188****2140</view>
+      <view wx:if="{{!authStatus}}" bindtap="doAuthInfo">未授权</view>
+      <view class="nickname">{{userInfo.nickname}}</view>
+      <view class="phone">{{userInfo.mobile}}</view>
     </view>
   </view>
   <view class="order-panel">

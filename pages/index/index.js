@@ -1,5 +1,4 @@
-const CONFIG = require('../../config.js')
-
+import config from '../../config'
 Page({
   data: {
     inputVal: "", // 搜索框内容
@@ -216,7 +215,7 @@ Page({
   },
   onShareAppMessage: function() {    
     return {
-      title: '"' + wx.getStorageSync('mallName') + '" ' + CONFIG.shareProfile,
+      title: '"' + wx.getStorageSync('mallName') + '" ' + config.shareProfile,
       path: '/pages/index/index?inviter_id=' + wx.getStorageSync('uid')
     }
   },
