@@ -1,22 +1,22 @@
 import config from '../../config'
+import banner from '../../models/banner'
+import grid from '../../models/grid'
+import goods from '../../models/goods'
+
 Page({
   data: {
     inputVal: "", // 搜索框内容
 
     loadingHidden: false, // loading
-    selectCurrent: 0,
-    categories: [],
-    activeCategoryId: 0,
-    goods: [],
-    
     scrollTop: 0,
     loadingMoreHidden: true,
 
+    banners: [],
+    categories: [],
+    goodsList: [],
     curPage: 1,
-    pageSize: 20,
-    cateScrollTop: 0
+    pageSize: 10,
   },
-
   tabClick: function(e) {
     wx.navigateTo({
       url: '/pages/goods/list?categoryId=' + e.currentTarget.id,
@@ -27,11 +27,10 @@ Page({
       url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
     })
   },
-  onLoad: function(e) {   
+  async onLoad(e) {
     wx.showShareMenu({
       withShareTicket: true
     }) 
-    const that = this
     if (e && e.scene) {
       const scene = decodeURIComponent(e.scene)
       if (scene) {        
@@ -41,77 +40,27 @@ Page({
     wx.setNavigationBarTitle({
       title: '商城首页'
     })
-    // Mock: Banner数据
-    that.setData({
-      banners: [
-        {
-          id: 1,
-          picture: 'https://dcdn.it120.cc/2019/12/29/2e79921a-92b3-4d1d-8182-cb3d524be5fb.png'
-        },
-        {
-          id: 2,
-          picture: 'https://dcdn.it120.cc/2019/12/29/daca65ee-4347-4792-a490-ccbac4b3c1d7.png'
-        },
-        {
-          id: 3,
-          picture: 'https://dcdn.it120.cc/2019/12/29/8396f65d-d615-46d8-b2e5-aa41820b9fe5.png'
-        }
-      ]
-    });
-    this.categories()
+    await this.loadHomeBanner()
+    await this.loadHomeGrid()
+    await this.getGoodsList(this.data.curPage, this.data.pageSize)
   },
-  onShow: function(e){
-  },
-  async categories(){
-    const categories = [
-      {
-        id: 92642,
-        name: '上装',
-        icon: 'https://cdn.it120.cc/apifactory/2019/04/09/f89753a227d26a3fe9ccc6f975857bb6.png',
-      },
-      {
-        id: 92642,
-        name: '裤装',
-        icon: 'https://cdn.it120.cc/apifactory/2019/04/09/5bfffd6ad0d4483870f024a3ed936528.png',
-      },
-      {
-        id: 92642,
-        name: '特价区',
-        icon: 'https://cdn.it120.cc/apifactory/2019/04/09/8d32c254e2cb86d2d42c99b768d136b6.png',
-      },
-      {
-        id: 92642,
-        name: '裙装',
-        icon: 'https://cdn.it120.cc/apifactory/2019/04/09/d800327091f216e2c83db8af7b6be306.png',
-      },
-      {
-        id: 92642,
-        name: '套装',
-        icon: 'https://cdn.it120.cc/apifactory/2019/04/09/cfee29650d6ae58a4bb1f84a3d899450.png',
-      },
-      {
-        id: 692642,
-        name: '上装',
-        icon: 'https://cdn.it120.cc/apifactory/2019/04/09/f89753a227d26a3fe9ccc6f975857bb6.png',
-      },
-      {
-        id: 692642,
-        name: '上装',
-        icon: 'https://cdn.it120.cc/apifactory/2019/04/09/f89753a227d26a3fe9ccc6f975857bb6.png',
-      },
-      {
-        id: 692642,
-        name: '上装',
-        icon: 'https://cdn.it120.cc/apifactory/2019/04/09/f89753a227d26a3fe9ccc6f975857bb6.png',
-      }
-    ];
-    // Todo: 加载宫格（8个）
+  async loadHomeBanner() {
+    const banners = await banner.getHomeBanner(1, 3)
     this.setData({
-      categories: categories,
-      activeCategoryId: 0,
+      banners: banners
+    });
+  },
+  async loadHomeGrid(){
+    const data = await grid.getGridList(1, 8)
+    const { error_code, msg } = data
+    if (error_code !== undefined) {
+      console.log(msg)
+      return
+    }
+    this.setData({
+      categories: data,
       curPage: 1
     });
-    this.getGoodsList(0);
   },
   onPageScroll(e) {
     let scrollTop = this.data.scrollTop
@@ -119,97 +68,27 @@ Page({
       scrollTop: e.scrollTop
     })
   },
-  async getGoodsList(categoryId, append) {
-    if (categoryId == 0) {
-      categoryId = "";
-    }
+  async getGoodsList(page, size) {
     wx.showLoading({
       "mask": true
     })
-    const goods = [
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 10000.99,
-        saleNum: 10
-      },
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },
-      {
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      }
-    ]
-    // Todo: 加载商品
+    const res = await goods.getGoodsList('', 0, page, size)
+    const {error_code, msg} = res
+    if (error_code !== undefined) {
+      console.log(msg)
+      return
+    }
+    const curPage = this.data.curPage
+    let goodsList = this.data.goodsList
+    if (curPage === 1) {
+      goodsList = res.list
+    } else {
+      goodsList = goodsList.concat(res.list)
+    }
+    const loadingMoreHidden = res.list.length === this.data.pageSize
     this.setData({
-      loadingMoreHidden: true,
-      goods: goods,
+      loadingMoreHidden: loadingMoreHidden,
+      goodsList: goodsList
     });
     wx.hideLoading()
   },
@@ -220,16 +99,20 @@ Page({
     }
   },
   onReachBottom: function() {
+    if (!this.data.loadingMoreHidden) {
+      return
+    }
+    const page = this.data.curPage + 1
     this.setData({
-      curPage: this.data.curPage + 1
+      curPage: page
     });
-    this.getGoodsList(this.data.activeCategoryId, true)
+    this.getGoodsList(page, this.data.pageSize)
   },
   onPullDownRefresh: function() {
     this.setData({
       curPage: 1
     });
-    this.getGoodsList(this.data.activeCategoryId)
+    this.getGoodsList(1, this.data.pageSize)
     wx.stopPullDownRefresh()
   },
   bindinput(e) {

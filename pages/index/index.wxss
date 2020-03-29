@@ -147,3 +147,7 @@
   font-size: 24rpx;
   margin-right: 32rpx;
 }
+.navigator-hover {
+  background-color: #ffffff;
+  opacity: 1
+}

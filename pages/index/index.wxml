@@ -5,23 +5,28 @@
 <view class="swiper-container">
   <swiper indicator-dots="true" indicator-active-color="#fff" autoplay circular>
     <swiper-item wx:for="{{banners}}" wx:key="id">
-      <image  mode="aspectFill" data-id="{{item.id}}" src="{{item.picture}}" />
+      <view wx:if="{{item.businessId === 0}}">
+        <image mode="aspectFill" data-id="{{item.id}}" src="{{item.picture}}" />
+      </view>
+      <navigator wx:if="{{item.businessId !== 0}}" url="/pages/goods-details/index?id={{item.businessId}}">
+        <image  mode="aspectFill" data-id="{{item.id}}" src="{{item.picture}}" />
+      </navigator>
     </swiper-item>
   </swiper>
 </view>
 <view class="category-box">
   <view class="category-list" wx:for="{{categories}}" wx:key="id">
     <view class="category-column {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick" id="{{item.id}}">
-      <image mode="aspectFill" class="category-imgbox" src="{{item.icon}}"></image>
+      <image mode="aspectFill" class="category-imgbox" src="{{item.picture}}"></image>
       <view class="category-title">{{item.name}}</view>
     </view>          
   </view>
 </view>
 <view class="container">
   <view class="goods-container">
-    <view class="goods-box" wx:for="{{goods}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+    <view class="goods-box" wx:for="{{goodsList}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
       <view class="img-box">
-        <image src="{{item.picture}}_m" class="image" mode="aspectFill" lazy-load="true" />
+        <image src="{{item.picture}}" class="image" mode="aspectFill" lazy-load="true" />
       </view>
       <view class="goods-title">{{item.name}}</view>
       <view style='display:flex;'>
