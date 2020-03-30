@@ -28,7 +28,7 @@
       <view class="img-box">
         <image src="{{item.picture}}" class="image" mode="aspectFill" lazy-load="true" />
       </view>
-      <view class="goods-title">{{item.name}}</view>
+      <view class="goods-title">{{item.title}}</view>
       <view style='display:flex;'>
         <view class="goods-price">¥ {{item.price}}</view>
         <view class="goods-sale">{{item.saleNum}}人付款</view>

@@ -5,36 +5,32 @@
 <view class="container" wx:if="{{goodsDetail.id}}">
   <view class="swiper-container">
     <swiper class="swiper_box" indicator-dots="true" indicator-active-color="#fff" autoplay circular>
-      <swiper-item wx:for="{{multipePicture}}" wx:key="id">
-        <image src="{{item.picture}}" class="slide-image" mode="aspectFill" lazy-load="true" />
+      <swiper-item wx:for="{{goodsDetail.bannerPicture}}">
+        <image src="{{item}}" class="slide-image" mode="aspectFill" lazy-load="true" />
       </swiper-item>
     </swiper>
   </view>
   <view class="goods-info">
     <view class="left">
-      <view class="goods-title">北欧风简约 四角柜子 原木深白色 给你极致的生活体验</view>
+      <view class="goods-title">{{goodsDetail.title}}</view>
       <view class="goods-profile">
-        <view class="p">¥ 100</view>
-        <view class="r"><text>价格 ¥</text><text class="goods-origin-price">100</text></view>
+        <view class="p">¥ {{goodsDetail.price}}</view>
+        <!-- <view class="r"><text>价格 ¥</text><text class="goods-origin-price">0</text></view> -->
       </view>
     </view>
     <view class="right">
-      <view class="share-btn">
+      <button class="share-btn" open-type="share">
         <image src="/images/icon/share.svg"></image>
         <view>分</view>
         <view>享</view>
-      </view>
+      </button>
     </view>
   </view>
-  <view class="coupon" bindtap="goCoupons">
+  <view class="coupon" bindtap="goCoupons" wx:if="{{coupons.length > 0}}">
     <view class="l">
-      <view class="coupon-item">
+      <view class="coupon-item" wx:for="{{coupons}}">
         <image src="/images/coupon/pure-bg.png" />
-        <view>满999减100元劵</view>
-      </view>
-      <view class="coupon-item">
-        <image src="/images/coupon/pure-bg.png" />
-        <view>满999减100元劵</view>
+        <view>{{item.title}}</view>
       </view>
     </view>
     <view class="r">
@@ -55,83 +51,46 @@
       <text>首页</text>
     </view>
     <view class="shop-cart-btn" bindtap="goShopCar">
-      <view class="shop-num">{{shopNum}}</view>
+      <!-- <view class="shop-num">{{shopNum}}</view> -->
       <image src="/images/icon/car-black.svg"></image>
       <text>购物车</text>
     </view>
-    <view wx:if="{{!goodsDetail.basicInfo.pingtuan}}" class="join-shop-cart" bindtap="{{goodsDetailSkuShowType==0?'toAddShopCar':'addShopCar'}}">加入购物车</view>
-    <view wx:if="{{!goodsDetail.basicInfo.pingtuan}}" class="now-buy"  data-shopType="{{shopType}}" bindtap="{{goodsDetailSkuShowType==0?'tobuy':'buyNow'}}">立即购买</view>
+    <view class="join-shop-cart" bindtap="addShopCar">加入购物车</view>
+    <view class="now-buy" bindtap="buyNow">立即购买</view>
   </view>
-  <!-- Todo: 多规格选择框 -->
   <view class="show-popup" hidden="{{hideShopPopup}}" catchtouchmove="true">
     <view class="popup-mask" bindtap="closePopupTap"></view>
     <view class="popup-contents">
       <view class="pop-goods-info">
         <view class="pop-img-box">
-          <image src="https://cdn.it120.cc/apifactory/2019/06/25/ecdec852-d535-4183-b447-47fefa568e43.jpg" class="goods-thumbnail" />
+          <image src="{{selectGoodsSku.picture}}" class="goods-thumbnail" />
         </view>
         <view class="pop-goods-des">
-          <view class="pop-goods-price">¥ 699</view>
-          <view class="pop-goods-stock">库存1381件</view>
-          <view class="pop-goods-stockName">请选择：颜色，款式，尺码（非标）</view>
+          <view class="pop-goods-price">¥ {{selectGoodsSku.price}}</view>
+          <view class="pop-goods-stock">库存{{selectGoodsSku.stock}}件</view>
+          <view class="pop-goods-stockName">{{selectGoodsSku.stockName}}</view>
         </view>
       </view>
-      <view class="pop-goods-specs">
-        <view class="pop-goods-spec-title">颜色</view>
+      <view class="pop-goods-specs" wx:for="{{goodsDetail.specList}}">
+        <view class="pop-goods-spec-title">{{item.name}}</view>
         <view class="pop-goods-spec-attrs">
-          <view class="pop-goods-spec-attr">
-            黑色
-          </view>
-          <view class="pop-goods-spec-attr checked">
-            白色
-          </view>
-          <view class="pop-goods-spec-attr unable">
-            墨绿色
-          </view>
-        </view>
-      </view>
-      <view class="pop-goods-specs">
-        <view class="pop-goods-spec-title">款式</view>
-        <view class="pop-goods-spec-attrs">
-          <view class="pop-goods-spec-attr">
-            V领款
-          </view>
-          <view class="pop-goods-spec-attr">
-            圆领款
-          </view>
-          <view class="pop-goods-spec-attr">
-            高领款
-          </view>
-        </view>
-      </view>
-      <view class="pop-goods-specs">
-        <view class="pop-goods-spec-title">尺码</view>
-        <view class="pop-goods-spec-attrs">
-          <view class="pop-goods-spec-attr">
-            S
-          </view>
-          <view class="pop-goods-spec-attr">
-            M
-          </view>
-          <view class="pop-goods-spec-attr">
-            L
-          </view>
-          <view class="pop-goods-spec-attr">
-            XL
+          <view class="pop-goods-spec-attr {{selectSpecs[item.specId] === attrItem.attrId ? 'checked' : ''}} {{selectSpecAttr[item.specId + '-' + attrItem.attrId] ? '' : 'unable'}}" 
+                data-spec-id="{{item.specId}}" data-attr-id="{{attrItem.attrId}}" 
+                wx:for="{{item.attrList}}" wx:for-item="attrItem"
+                bindtap="doSwitchSpec">
+            {{attrItem.value}}
           </view>
         </view>
       </view>
       <view class="buy-num-box">
         <view class="num-label">购买数量</view>
-        <view class="num-box">
-          <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
-          <view class="num-input">
-            <input type="number" value="{{buyNumber}}" disabled/>
-          </view>
-          <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+        <view class="operation-btn-group">
+          <view class="reduce" bindtap="doReduce">-</view>
+          <view class="num">{{buyNum}}</view>
+          <view class="add" bindtap="doAdd">+</view>
         </view>
       </view>
-      <view bindtap="addShopCar">
+      <view bindtap="{{operationType === 1 ? 'toAddShopCar' : 'toBuyNow'}}">
         <view class="confirm">确定</view>
       </view>
     </view>

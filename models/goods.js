@@ -5,6 +5,10 @@ class Goods {
   async getGoodsList(keyword, categoryId, page, size) {
     return get(`/api/goods/list?k=${keyword}&c=${categoryId}&page=${page}&size=${size}`)
   }
+
+  async getGoodsDetails(id) {
+    return get(`/api/goods/detail?id=${id}`)
+  }
 }
 
 export default new Goods()

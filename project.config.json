@@ -60,7 +60,7 @@
 					"id": 1,
 					"name": "商品详情页面",
 					"pathName": "pages/goods-details/index",
-					"query": "id=277082",
+					"query": "id=7",
 					"scene": 1011
 				},
 				{
@@ -144,6 +144,7 @@
 					"id": -1,
 					"name": "浏览历史",
 					"pathName": "pages/browse/index",
+					"query": "",
 					"scene": null
 				}
 			]

@@ -1,96 +1,287 @@
-const CONFIG = require('../../config.js')
-const SelectSizePrefix = "选择："
+import goods from '../../models/goods'
+import coupon from '../../models/coupon'
 
 Page({
   data: {
-    // 商品-图片
-    multipePicture: [
-      {
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/ecdec852-d535-4183-b447-47fefa568e43.jpg'
-      },
-      {
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/ecdec852-d535-4183-b447-47fefa568e43.jpg'
-      },
-      {
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/ecdec852-d535-4183-b447-47fefa568e43.jpg'
-      }
-    ],
-    // 商品-多规格
-    skuList: [
-        {
-          id: 1,
-          title: "爆款-3.5英寸",
-          price: "1.20",
-          code: "123",
-          stock: 7,
-          specs: "[{\"keyId\":1,\"key\":\"颜色\",\"valueId\":4,\"value\":\"蓝色\"},{\"keyId\":2,\"key\":\"尺寸\",\"valueId\":6,\"value\":\"3.5英寸\"}]"
-        }
-    ],
-    specList: [
-        {
-          specId: 1,
-          name: "颜色",
-          attrList: [
-            {
-              attrId: 4,
-              value: "蓝色"
-            }
-          ]
-        },
-        {
-          specId: 2,
-          name: "尺寸",
-          attrList: [
-            {
-              attrId: 6,
-              value: "3.5英寸"
-            }
-          ]
-        }
-    ],
-    goodsDetail: {
-      id: 1,
-      content: "<p><img class=\"img-ks-lazyload\" src=\"https://img.alicdn.com/imgextra/i2/4134225718/O1CN011s6tA01sL8d3mKD_!!4134225718.jpg\" width=\"790\" align=\"absmiddle\" /><img class=\"img-ks-lazyload\" src=\"https://img.alicdn.com/imgextra/i3/4134225718/O1CN011s6tA1VUrpntRXW_!!4134225718.jpg\" width=\"790\" align=\"absmiddle\" /><img class=\"img-ks-lazyload\" src=\"https://img.alicdn.com/imgextra/i4/4134225718/O1CN011s6tA2H1g9yk8i2_!!4134225718.jpg\" width=\"790\" align=\"absmiddle\" data-spm-anchor-id=\"a220o.1000855.0.i2.591c48abotbO5M\" /></p>"
-    },
-    hasMoreSelect: false,
-    selectSize: SelectSizePrefix,
-    selectSizePrice: 0,
-    totalScoreToPay: 0,
-    shopNum: 0,
+    goodsDetail: {},
     hideShopPopup: true,
-    buyNumber: 0,
-    buyNumMin: 1,
-    buyNumMax: 0,
-
-    propertyChildIds: "",
-    propertyChildNames: "",
-    canSubmit: false, //  选中规格尺寸时候是否允许加入购物车
-    shopType: "addShopCar", //购物类型，加入购物车或立即购买，默认为加入购物车
+    coupons: [],
+    selectGoodsSku: {
+      picture: '',
+      price: '',
+      stock: '',
+      stockName: ''
+    },
+    selectSpecs: {},
+    selectReady: false, // 规格选择就绪
+    operationType: 1,  // 操作类型：1-加购物车 2-立即购买
+    buyNum: 1, // 一次最多购买999件
+    selectSkuId: 0,
+    selectSpecAttr: {}  // 是否可选的状态
   },
-  async onLoad(e) {
-    if (e && e.scene) {
-      const scene = decodeURIComponent(e.scene) // 处理扫码进商品详情页面的逻辑
-      if (scene) {
-        e.id = scene.split(',')[0]
-        wx.setStorageSync('referrer', scene.split(',')[1])
+  onLoad(e) {
+    wx.showShareMenu({
+      withShareTicket: true
+    }) 
+    this.data.goodsId = e.id
+  },
+  async onShow (){
+    await this.loadGoodsInfo()
+    await this.loadCouponList()
+  },
+  async loadGoodsInfo() {
+    const data = await goods.getGoodsDetails(this.data.goodsId)
+    const {error_code, msg} = data
+    if (error_code !== undefined) {
+      console.log(msg)
+      this.setData({
+        goodsDetail: {}
+      })
+      return
+    }
+    const price = this.calcGoodsPriceInterval(data.price, data.skuList)
+    // 商品详情
+    const detailPicture = JSON.parse(data.detailPicture)
+    let content = "<p>"
+    for (let i = 0; i < detailPicture.length; i++) {
+      content += "<img class=\"img-ks-lazyload\" src=\"" + detailPicture[i] + "\" width=\"790\" align=\"absmiddle\" />"
+    }
+    content += "</p>"
+    // 滚动的商品图
+    const bannerPicture = JSON.parse(data.bannerPicture)
+    bannerPicture.unshift(data.picture)
+    data.bannerPicture = bannerPicture
+    data.content = content
+    data.price = price
+    this.setData({
+      goodsDetail: data
+    })
+    this.initSelectGoodsSku(data)
+    this.initSpecAttrOptionalStatus(data)
+  },
+  // 计算商品价格区间
+  calcGoodsPriceInterval (price, skuList) {
+    let min = 0
+    let max = 0
+    for (let i = 0; i < skuList.length; i++) {
+      const sku = skuList[i]
+      const skuPrice = parseInt(sku.price, 10)
+      if (min === 0 || min > skuPrice) {
+        min = skuPrice
+      }
+      if (max === 0 || max < skuPrice) {
+        max = skuPrice
       }
     }
-    this.data.goodsId = e.id
-    const that = this
-    this.data.kjJoinUid = e.kjJoinUid    
-    this.setData({
-      goodsDetailSkuShowType: CONFIG.goodsDetailSkuShowType,
-      curuid: wx.getStorageSync('uid')
-    })
-    this.shippingCartInfo()
+    if (min === max) {
+      if (min > 0) {
+        price = min
+      }
+    } else {
+      price = min + '-' + max
+    }
+    return price
   },
-  async shippingCartInfo(){
-    // Todo: 购物车数量
+  // 初始化预选商品
+  initSelectGoodsSku({picture, price, skuList, specList}) {
+    if (skuList.length === 0) {
+      this.setData({
+        selectGoodsSku: {
+          picture: picture,
+          price: price,
+          stock: 0,
+          stockName: ''
+        }
+      })
+      return
+    }
+    let stock = 0
+    for (let i = 0; i < skuList.length; i++) {
+      const sku = skuList[i]
+      stock += sku.stock
+    }
+    let selectSpecs = {}
+    for (let i = 0; i < specList.length; i++) {
+      const spec = specList[i]
+      selectSpecs[spec.specId] = 0
+    }
     this.setData({
-      shopNum: 10
+      selectSpecs: selectSpecs,
+      selectGoodsSku: {
+        picture: picture,
+        price: price,
+        stock: stock,
+        stockName: ''
+      }
+    })
+    this.calcSelectStockName()
+  },
+  // 计算-已经选择的规格组合
+  calcSelectStockName () {
+    const selectSpecs = this.data.selectSpecs
+    const specList = this.data.goodsDetail.specList
+    const selectGoodsSku = this.data.selectGoodsSku
+    let skipCount = 0
+    let stockName = ""
+    let tmpSpecs = ""
+    for (let i = 0; i < specList.length; i++) {
+      const spec = specList[i]
+      if (selectSpecs[spec.specId] !== 0) {
+        skipCount += 1
+        tmpSpecs += '"' + spec.name + '"'
+        continue
+      }
+      stockName += spec.name + ','
+    }
+    let selectReady = false
+    if (skipCount < specList.length) {
+      stockName = '请选择：' + stockName.substring(0, stockName.length - 1)
+      
+    } else {
+      selectReady = true
+      stockName = '已选：' + tmpSpecs
+    }
+    selectGoodsSku.stockName = stockName
+    this.setData({
+      selectReady: selectReady,
+      selectGoodsSku: selectGoodsSku
     })
   },
-  onShow (){
+  // 初始化规格选项状态
+  initSpecAttrOptionalStatus({specList}) {
+    // spec属性矩阵（K => specId-attrId，V => true）
+    const selectSpecAttr = {}
+    for (let i = 0; i < specList.length; i++) {
+      const spec = specList[i]
+      const attrList = spec.attrList
+      for (let j = 0; j < attrList.length; j++) {
+        const attr = attrList[j]
+        const key = spec.specId + '-' + attr.attrId
+        selectSpecAttr[key] = true
+      }
+    }
+    this.setData({
+      selectSpecAttr: selectSpecAttr
+    })
+    this.updateOptionalSpecAttr()
+  },
+  // 选择规格
+  doSwitchSpec(e) {
+    const specId = e.currentTarget.dataset.specId
+    const attrId = e.currentTarget.dataset.attrId
+    const selectSpecAttr = this.data.selectSpecAttr
+    const selectSpecs = this.data.selectSpecs
+    const curAttrId = selectSpecs[specId]
+    const key = specId + '-' + attrId
+    if (!selectSpecAttr[key]) {
+      return
+    }
+    if (curAttrId === attrId) {
+      selectSpecs[specId] = 0
+    } else {
+      selectSpecs[specId] = attrId
+    }
+    this.setData({
+      selectSpecs: selectSpecs
+    })
+    this.calcSelectStockName()
+    this.updateOptionalSpecAttr()
+    this.updateOptionalSpec()
+  },
+  // 更新所选的规格
+  updateOptionalSpec() {
+    const goodsDetail = this.data.goodsDetail
+    const selectGoodsSku = this.data.selectGoodsSku
+    const skuList = this.data.goodsDetail.skuList
+    const selectSpecs = this.data.selectSpecs
+    let selectSkuId = 0
+    if (this.data.selectReady) {
+      let matchSku = null
+      for (let i = 0; i < skuList.length; i++) {
+        const sku = skuList[i]
+        const specs = JSON.parse(sku.specs)
+        const match = true
+        for (let j = 0; j < specs.length; j++) {
+          const skuSpec = specs[j]
+          if (selectSpecs[skuSpec.keyId] !== skuSpec.valueId) {
+            match = false
+          }
+        }
+        if (match) {
+          matchSku = sku
+        }
+      }
+      selectGoodsSku.picture = matchSku.picture
+      selectGoodsSku.price = matchSku.price
+      selectSkuId = matchSku.id
+    } else {
+      selectGoodsSku.picture = goodsDetail.picture
+      selectGoodsSku.price = goodsDetail.price
+    }
+    this.setData({
+      selectGoodsSku: selectGoodsSku,
+      selectSkuId: selectSkuId
+    })
+  },
+  // 无库存的选项置灰
+  updateOptionalSpecAttr() {
+    const selectSpecs = this.data.selectSpecs
+    // 提取匹配的SKU
+    const matchSkuList = []
+    const skuList = this.data.goodsDetail.skuList
+    for (let i = 0; i < skuList.length; i++) {
+      const sku = skuList[i]
+      const specs = JSON.parse(sku.specs)
+      let match = true
+      if (sku.stock <= 0) {
+        match = false
+      }
+      for (let j = 0; j < specs.length; j++) {
+        const skuSpec = specs[j]
+        if (selectSpecs[skuSpec.keyId] === 0) {
+          continue
+        }
+        if (selectSpecs[skuSpec.keyId] !== skuSpec.valueId) {
+          match = false
+        }
+      }
+      if (sku.stock <= 0) {
+        match = false
+      }
+      if (match) {
+        matchSkuList.push(sku)
+      }
+    }
+    // 计算选项的状态
+    const selectSpecAttr = this.data.selectSpecAttr
+    for (let i in selectSpecAttr) {
+      selectSpecAttr[i] = false
+    }
+    for (let i = 0; i < matchSkuList.length; i++) {
+      const specs = JSON.parse(matchSkuList[i].specs)
+      for (let j = 0; j < specs.length; j++) {
+        const key = specs[j].keyId + '-' + specs[j].valueId
+        selectSpecAttr[key] = true
+      }
+    }
+    this.setData({
+      selectSpecAttr: selectSpecAttr
+    })
+  },
+  // 加载优惠券
+  async loadCouponList() {
+    const data = await coupon.getCouponList(1, 2)
+    const {error_code, msg} = data
+    if (error_code !== undefined) {
+      console.log(msg)
+      this.setData({
+        coupons: []
+      })
+      return
+    }
+    this.setData({
+      coupons: data.list
+    })
   },
   goCoupons() {
     wx.navigateTo({
@@ -107,87 +298,70 @@ Page({
       url: "/pages/shop-cart/index"
     });
   },
-  // 添加-购物车
-  toAddShopCar: function() {
-    this.setData({
-      shopType: "addShopCar"
-    })
-    this.bindGuiGeTap();
-  },
-  tobuy: function() {
-    this.setData({
-      shopType: "tobuy",
-      selectSizePrice: this.data.goodsDetail.basicInfo.minPrice
-    });
-    this.bindGuiGeTap();
-  },
-  /**
-   * 规格选择弹出框
-   */
-  bindGuiGeTap: function() {
-    this.setData({
-      hideShopPopup: false
-    })
-  },
-  numJianTap: function() {
-    if (this.data.buyNumber > this.data.buyNumMin) {
-      var currentNum = this.data.buyNumber;
-      currentNum--;
-      this.setData({
-        buyNumber: currentNum
-      })
-    }
-  },
-  numJiaTap: function() {
-    if (this.data.buyNumber < this.data.buyNumMax) {
-      var currentNum = this.data.buyNumber;
-      currentNum++;
-      this.setData({
-        buyNumber: currentNum
-      })
-    }
-  },
-  /**
-   * 加入购物车
-   */
   async addShopCar() {
-  },
-  /**
-   * 立即购买
-   */
-  buyNow: function(e) {
-
-  },
-  onShareAppMessage: function() {
-    
-  },
-  goIndex() {
-    wx.switchTab({
-      url: '/pages/index/index',
-    });
-  },
-  cancelLogin() {
     this.setData({
-      wxlogin: true
+      hideShopPopup: false,
+      operationType: 1
     })
   },
-  processLogin(e) {
-    if (!e.detail.userInfo) {
-      wx.showToast({
-        title: '已取消',
-        icon: 'none',
-      })
-      return;
+  toAddShopCar() {
+    if (this.checkGoodsSelectAndStock()) {
+      console.log('添加购物车: skuId = ', this.data.selectSkuId, ' goodsId = ', this.data.goodsId)
     }
   },
-  closePop(){
+  buyNow: function(e) {
     this.setData({
-      posterShow: false
+      hideShopPopup: false,
+      operationType: 2
+    })
+  },
+  toBuyNow () {
+    if (this.checkGoodsSelectAndStock()) {
+      console.log('现在购买: skuId = ', this.data.selectSkuId, ' goodsId = ', this.data.goodsId)
+    }
+  },
+  // 检查选择规格的状态和库存
+  checkGoodsSelectAndStock () {
+    if (!this.data.selectReady) {
+      wx.showToast({
+        title: this.data.selectGoodsSku.stockName,
+        icon: 'none'
+      })
+      return false
+    }
+    return true
+  },
+  doAdd() {
+    let buyNum = this.data.buyNum
+    if (buyNum >= 999) {
+      wx.showToast({
+        title: '不能超过999件',
+        icon: 'none'
+      })
+      return
+    }
+    this.setData({
+      buyNum: buyNum + 1
+    })
+  },
+  doReduce() {
+    let buyNum = this.data.buyNum
+    if (buyNum <= 1) {
+      return
+    }
+    this.setData({
+      buyNum: buyNum - 1
     })
   },
   closePopupTap() {
     this.setData({
       hideShopPopup: true
     })
-  }
+  },
+  onShareAppMessage: function() {
+    return {
+      title: this.data.goodsDetail.title,
+      path: `/pages/goods-details/index?id=${this.data.goodsId}`
+    }
+  },
 })

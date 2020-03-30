@@ -31,14 +31,8 @@ Page({
     wx.showShareMenu({
       withShareTicket: true
     }) 
-    if (e && e.scene) {
-      const scene = decodeURIComponent(e.scene)
-      if (scene) {        
-        wx.setStorageSync('referrer', scene.substring(11))
-      }
-    }
     wx.setNavigationBarTitle({
-      title: '商城首页'
+      title: '首页'
     })
     await this.loadHomeBanner()
     await this.loadHomeGrid()
@@ -94,8 +88,8 @@ Page({
   },
   onShareAppMessage: function() {    
     return {
-      title: '"' + wx.getStorageSync('mallName') + '" ' + config.shareProfile,
-      path: '/pages/index/index?inviter_id=' + wx.getStorageSync('uid')
+      title: config.shareProfile,
+      path: '/pages/index/index'
     }
   },
   onReachBottom: function() {

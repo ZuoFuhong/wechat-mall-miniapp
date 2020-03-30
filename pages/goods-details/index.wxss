@@ -62,6 +62,10 @@ swiper-item image {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border-radius: 0;
+}
+.share-btn::after {
+  border: none;
 }
 .share-btn image {
   height: 28rpx;
@@ -137,7 +141,7 @@ swiper-item image {
   font-size:28rpx;
   color:#666666;
   line-height: 56rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 10rpx;
 }
 .goods-text image{
   width: 100%;
@@ -370,6 +374,7 @@ swiper-item image {
    padding: 30rpx 30rpx 30rpx 0;
    margin-left: 30rpx; 
    align-items: center;
+   position: relative;
 }
 .num-label{
   font-size:26rpx;
@@ -401,6 +406,9 @@ swiper-item image {
   font-size: 30rpx;
   color:#ffffff;
   background-color: #EB4D50;
+}
+.outof {
+  background-color: #555;
 }
 .buy-num-box .num-box .hui{
   background-color: #f5f5f9;
@@ -472,4 +480,34 @@ swiper-item image {
   width:300rpx;
   height:300rpx;
   margin-top: 50rpx;
+}
+.buy-num-box .operation-btn-group {
+  position: absolute;
+  right: 20rpx;
+  bottom: 30rpx;
+  width: 200rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.operation-btn-group .num {
+  width: 80rpx;
+  background-color: #E29F9F;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  font-size: 24rpx;
+}
+.operation-btn-group .add,.reduce {
+  margin: 0 20rpx;
+  width: 40rpx;
+  height: 40rpx;
+  text-align: center;
+  line-height: 36rpx;
+  font-size: 34rpx;
+  font-weight: bold;
+}
+.operation-btn-group .add:active,.reduce:active {
+  background-color: #E29F9F;
+  color: white;
 }
