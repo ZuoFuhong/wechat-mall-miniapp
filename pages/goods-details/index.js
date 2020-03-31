@@ -1,5 +1,6 @@
 import goods from '../../models/goods'
 import coupon from '../../models/coupon'
+import cart from '../../models/cart'
 
 Page({
   data: {
@@ -14,8 +15,8 @@ Page({
     },
     selectSpecs: {},
     selectReady: false, // 规格选择就绪
-    operationType: 1,  // 操作类型：1-加购物车 2-立即购买
-    buyNum: 1, // 一次最多购买999件
+    operationType: 1,   // 操作类型：1-加购物车 2-立即购买
+    buyNum: 1,          // 一次最多购买99件
     selectSkuId: 0,
     selectSpecAttr: {}  // 是否可选的状态
   },
@@ -304,9 +305,18 @@ Page({
       operationType: 1
     })
   },
-  toAddShopCar() {
+  async toAddShopCar() {
     if (this.checkGoodsSelectAndStock()) {
-      console.log('添加购物车: skuId = ', this.data.selectSkuId, ' goodsId = ', this.data.goodsId)
+      const res = await cart.editCart(parseInt(this.data.goodsId, 10), this.data.selectSkuId, this.data.buyNum)
+      const { error_code, msg } = res
+      if (error_code !== undefined) {
+        console.log(msg)
+        return
+      }
+      wx.showToast({
+        title: '添加成功'
+      })
+      this.closePopupTap()
     }
   },
   buyNow: function(e) {
@@ -317,7 +327,7 @@ Page({
   },
   toBuyNow () {
     if (this.checkGoodsSelectAndStock()) {
-      console.log('现在购买: skuId = ', this.data.selectSkuId, ' goodsId = ', this.data.goodsId)
+      console.log('现在购买: skuId = ', this.data.selectSkuId, ' goodsId = ', this.data.goodsId, ' num = ', this.data.buyNum)
     }
   },
   // 检查选择规格的状态和库存
@@ -333,9 +343,9 @@ Page({
   },
   doAdd() {
     let buyNum = this.data.buyNum
-    if (buyNum >= 999) {
+    if (buyNum >= 99) {
       wx.showToast({
-        title: '不能超过999件',
+        title: '不能超过99件',
         icon: 'none'
       })
       return
