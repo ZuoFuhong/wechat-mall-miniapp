@@ -1,6 +1,5 @@
 page {
   background: #f5f5f5;
-  padding-bottom: 100rpx;
 }
 page,view,image,input {
   display: block;
@@ -68,13 +67,17 @@ page,view,image,input {
   flex-shrink: 0;
 }
 .list1 .goods-info {
-  padding: 16rpx;
+  padding: 16rpx 16rpx 50rpx;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .list1 .goods-info .title {
   color: #333;
-  font-size: 28rpx;
-  height: 100rpx;
+  font-size: 24rpx;
+  height: 80rpx;
+  overflow: hidden;
 }
 .list1 .goods-info .bottom {
   display: flex;
@@ -112,12 +115,15 @@ page,view,image,input {
 }
 .list2 .goods-info .title {
   color: #333;
-  font-size: 28rpx;
-  height: 100rpx;
+  font-size: 24rpx;
+  height: 80rpx;
+  overflow: hidden;
+  padding: 5rpx;
 }
 .list2 .goods-info .bottom {
   display: flex;
   align-items: baseline;
+  padding: 5rpx;
 }
 .list2 .goods-info .bottom .price {
   color: #FF3B30;
@@ -127,4 +133,29 @@ page,view,image,input {
 .list2 .goods-info .bottom .saleNum {
   font-size: 22rpx;
   color: #999999;
+}
+.navigator-hover {
+  background-color: #ffffff;
+  opacity: 1
+}
+.container {
+  background-color: #fff;
+  min-height: 100%;
+  display: block;
+}
+.morePlace{
+  width: 100%;
+  padding: 30rpx 0rpx 60rpx;
+  background-color: #fff;
+  color: rgba(0,0,0,.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+}
+.morePlace .l,.r {
+  width: 150rpx;
+  height: 1px;
+  background-color: rgba(0,0,0,.3);
+  margin: 0 20rpx;
 }

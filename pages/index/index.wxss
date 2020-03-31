@@ -151,3 +151,19 @@
   background-color: #ffffff;
   opacity: 1
 }
+.morePlace{
+  width: 100%;
+  padding: 30rpx 0rpx 60rpx;
+  background-color: #fff;
+  color: rgba(0,0,0,.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+}
+.morePlace .l,.r {
+  width: 150rpx;
+  height: 1px;
+  background-color: rgba(0,0,0,.3);
+  margin: 0 20rpx;
+}

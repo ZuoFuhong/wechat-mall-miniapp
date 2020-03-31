@@ -8,7 +8,6 @@ Page({
     inputVal: "", // 搜索框内容
 
     loadingHidden: false, // loading
-    scrollTop: 0,
     loadingMoreHidden: true,
 
     banners: [],
@@ -57,16 +56,12 @@ Page({
     });
   },
   onPageScroll(e) {
-    let scrollTop = this.data.scrollTop
-    this.setData({
-      scrollTop: e.scrollTop
-    })
   },
   async getGoodsList(page, size) {
     wx.showLoading({
       "mask": true
     })
-    const res = await goods.getGoodsList('', 0, page, size)
+    const res = await goods.getGoodsList('', 0, 0, page, size)
     const {error_code, msg} = res
     if (error_code !== undefined) {
       console.log(msg)
@@ -119,7 +114,7 @@ Page({
       inputVal: e.detail.value
     })
     wx.navigateTo({
-      url: '/pages/goods/list?name=' + this.data.inputVal,
+      url: '/pages/goods/list?k=' + this.data.inputVal,
     })
   },
 })

@@ -1,4 +1,3 @@
-import config from '../../config'
 import coupon from '../../models/coupon'
 
 Page({

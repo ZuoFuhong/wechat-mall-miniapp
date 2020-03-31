@@ -16,7 +16,7 @@
 </view>
 <view class="category-box">
   <view class="category-list" wx:for="{{categories}}" wx:key="id">
-    <view class="category-column {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick" id="{{item.id}}">
+    <view class="category-column {{activeCategoryId == item.id ? 'type-item-on' : ''}}" bindtap="tabClick" id="{{item.categoryId}}">
       <image mode="aspectFill" class="category-imgbox" src="{{item.picture}}"></image>
       <view class="category-title">{{item.name}}</view>
     </view>          
@@ -35,7 +35,9 @@
       </view>
     </view>
   </view>
-  <view hidden="{{loadingMoreHidden ? true : false}}" class="weui-loadmore weui-loadmore_line" style='margin-top:60rpx;margin-bottom:30rpx;'>
-    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多啦</view>
+  <view class="morePlace" hidden="{{loadingMoreHidden ? true : false}}">
+    <view class="l"></view>
+    <view>没有更多啦</view>
+    <view class="r"></view>
   </view>
 </view>

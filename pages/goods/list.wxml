@@ -1,22 +1,22 @@
 <view class="header">
   <view class="search">
-    <input type="text" placeholder="搜索商品" value="{{name}}" bindinput="bindinput" bindconfirm="bindconfirm"></input>
+    <input type="text" placeholder="搜索商品" value="{{keyword}}" bindinput="bindinput" bindconfirm="bindconfirm"></input>
     <image src="/images/icon/search.svg"></image>
   </view>
   <image class="show-type" src="/images/icon/list{{listType}}.svg" bindtap="changeShowType"></image>
 </view>
 <view class="line"></view>
 <view class="filters">
-  <view class="item {{orderBy==''?'active':''}}" data-val="" bindtap="filter">综合</view>
-  <view class="item {{orderBy=='addedDown'?'active':''}}" data-val="addedDown" bindtap="filter">新品</view>
-  <view class="item {{orderBy=='ordersDown'?'active':''}}" data-val="ordersDown" bindtap="filter">销量</view>
-  <view class="item {{orderBy=='priceUp'?'active':''}}" data-val="priceUp" bindtap="filter">价格</view>
+  <view class="item {{sort === 0 ?'active':''}}" data-val="0" bindtap="filter">综合</view>
+  <view class="item {{sort === 1 ?'active':''}}" data-val="1" bindtap="filter">新品</view>
+  <view class="item {{sort === 2 ?'active':''}}" data-val="2" bindtap="filter">销量</view>
+  <view class="item {{sort === 3 ?'active':''}}" data-val="3" bindtap="filter">价格</view>
 </view>
 <navigator wx:if="{{listType == 1}}" wx:for="{{goods}}" wx:key="id" url="/pages/goods-details/index?id={{item.id}}">
   <view class="list1">
     <image class="img" mode="aspectFill" src="{{item.picture}}"></image>
     <view class="goods-info">
-      <view class="title">{{item.name}}</view>
+      <view class="title">{{item.title}}</view>
       <view class="bottom">
         <view class="price">¥ {{item.price}}</view>
         <view class="saleNum"> {{item.saleNum}}人付款</view>
@@ -29,12 +29,17 @@
     <view class="list2">
       <image class="img" mode="aspectFill" src="{{item.picture}}"></image>
       <view class="goods-info">
-        <view class="title">{{item.name}}</view>
+        <view class="title">{{item.title}}</view>
         <view class="bottom">
           <view class="price">¥ {{item.price}}</view>
           <view class="saleNum">{{item.saleNum}}人付款</view>
         </view>
       </view>
     </view>
-  </navigator>  
+  </navigator>
+</view>
+<view class="morePlace" hidden="{{loadingMoreHidden ? true : false}}">
+  <view class="l"></view>
+  <view>没有更多啦</view>
+  <view class="r"></view>
 </view>

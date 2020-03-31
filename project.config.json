@@ -74,14 +74,14 @@
 					"id": 3,
 					"name": "商品列表",
 					"pathName": "pages/goods/list",
-					"query": "name=兔毛",
+					"query": "k=",
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 4,
 					"name": "商品分类",
 					"pathName": "pages/category/category",
-					"query": "name=兔毛",
+					"query": "",
 					"scene": null
 				},
 				{

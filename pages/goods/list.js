@@ -1,165 +1,60 @@
+import goods from '../../models/goods'
+
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
     listType: 1, // 1为1个商品一行，2为2个商品一行    
-    name: '', // 搜索关键词
-    orderBy: '', // 排序规则
+    keyword: '', // 搜索关键词
+    sort: 0, // 排序规则：0-综合 1-新品 2-销量 3-价格
+    curPage: 1,
+    pageSize: 10,
+    goods: [],
+    loadingMoreHidden: true,
+    categoryId: 0
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
   onLoad: function (options) {
     this.setData({
-      name: options.name,
+      keyword: options.k || '',
       categoryId: options.categoryId
     })
     this.search()
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
   async search(){
-    // 搜索商品
     wx.showLoading({
       title: '加载中',
     })
-    const _data = {
-      orderBy: this.data.orderBy,
-      page: 1,
-      pageSize: 500,
+    const res = await goods.getGoodsList(this.data.keyword, this.data.sort, this.data.categoryId, this.data.curPage, this.data.pageSize)
+    const { error_code, msg } = res
+    if (error_code !== undefined) {
+      console.log(msg)
+      return
     }
-    if (this.data.name) {
-      _data.nameLike = this.data.name
-    }
-    if (this.data.categoryId) {
-      _data.categoryId = this.data.categoryId
-    }
-    const goods = [
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 10000.99,
-        saleNum: 10
-      },
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },
-      {
-        id: 277082,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },
-      {
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      },{
-        id: 1,
-        name: '兔毛马甲',
-        picture: 'https://cdn.it120.cc/apifactory/2019/06/25/76d3c433-96ea-4f41-b149-31ea0983cd8f.jpg',
-        price: 100.99,
-        saleNum: 10
-      }
-    ]
     this.setData({
-      goods
+      goods: res.list,
+      loadingMoreHidden: res.list.length === this.data.pageSize
     })
     wx.hideLoading()
   },
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
+  // 上拉加载更多
+  async onReachBottom() {
+    if (!this.data.loadingMoreHidden) {
+      return
+    }
+    let curPage = this.data.curPage
+    let goodsList = this.data.goods
+    curPage += 1
+    const res = await goods.getGoodsList(this.data.keyword, this.data.sort, this.data.categoryId, curPage, this.data.pageSize)
+    const { error_code, msg } = res
+    if (error_code !== undefined) {
+      console.log(msg)
+      return
+    }
+    goodsList = goodsList.concat(res.list)
+    this.setData({
+      curPage: curPage,
+      goods: goodsList,
+      loadingMoreHidden: res.list.length === this.data.pageSize
+    })    
   },
   changeShowType(){
     if (this.data.listType == 1) {
@@ -174,18 +69,21 @@ Page({
   },
   bindinput(e){
     this.setData({
-      name: e.detail.value
+      keyword: e.detail.value
     })
   },
   bindconfirm(e){
     this.setData({
-      name: e.detail.value
+      curPage: 1,
+      categoryId: 0,
+      keyword: e.detail.value
     })
     this.search()
   },
   filter(e){
     this.setData({
-      orderBy: e.currentTarget.dataset.val
+      sort: parseInt(e.currentTarget.dataset.val, 10),
+      curPage: 1
     })
     this.search()
   },
