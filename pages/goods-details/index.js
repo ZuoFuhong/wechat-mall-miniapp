@@ -18,7 +18,8 @@ Page({
     operationType: 1,   // 操作类型：1-加购物车 2-立即购买
     buyNum: 1,          // 一次最多购买99件
     selectSkuId: 0,
-    selectSpecAttr: {}  // 是否可选的状态
+    selectSpecAttr: {}, // 是否可选的状态
+    outofStockStatus: false  // 缺货状态
   },
   onLoad(e) {
     wx.showShareMenu({
@@ -92,7 +93,8 @@ Page({
           price: price,
           stock: 0,
           stockName: ''
-        }
+        },
+        outofStockStatus: true
       })
       return
     }
@@ -332,6 +334,9 @@ Page({
   },
   // 检查选择规格的状态和库存
   checkGoodsSelectAndStock () {
+    if (this.data.outofStockStatus) {
+      return
+    }
     if (!this.data.selectReady) {
       wx.showToast({
         title: this.data.selectGoodsSku.stockName,

@@ -32,7 +32,7 @@ Page({
       withShareTicket: true
     }) 
     wx.setNavigationBarTitle({
-      title: '首页'
+      title: config.shopName
     })
     await this.loadHomeBanner()
     await this.loadHomeGrid()

@@ -1,24 +1,14 @@
 <view class="container">
   <view class="coupons">
-    <view class="coupon">
+    <view class="coupon" wx:for="{{coupons}}">
       <image class="bg-image" src="/images/coupon/coupon-bg.svg" />
-      <view class="amount">￥ 180 <text>满1590减180</text></view>
+      <view class="amount">{{item.amount}} <text>{{item.title}}</text></view>
       <view class="use-scope">全场所有商品通用</view>
-      <view class="take-btn">
+      <view class="take-btn" data-id="{{item.couponId}}" bindtap="takeCoupon">
         <view>立即</view>
         <view>领券</view>
       </view>
-      <view class="deadline">6/30-7/31</view>
-    </view>
-    <view class="coupon">
-      <image class="bg-image" src="/images/coupon/coupon-bg.svg" />
-      <view class="amount">￥ 180 <text>满1590减180</text></view>
-      <view class="use-scope">全场所有商品通用</view>
-      <view class="take-btn">
-        <view>立即</view>
-        <view>领券</view>
-      </view>
-      <view class="deadline">6/30-7/31</view>
+      <view class="deadline">{{item.period}}</view>
     </view>
   </view>
 </view>

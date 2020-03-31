@@ -91,7 +91,8 @@
         </view>
       </view>
       <view bindtap="{{operationType === 1 ? 'toAddShopCar' : 'toBuyNow'}}">
-        <view class="confirm">确定</view>
+        <view wx:if="{{!outofStockStatus}}" class="confirm">确定</view>
+        <view wx:if="{{outofStockStatus}}" class="confirm outof">缺货</view>
       </view>
     </view>
   </view>
