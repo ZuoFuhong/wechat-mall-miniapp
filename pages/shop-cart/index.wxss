@@ -46,23 +46,26 @@ scroll-view {
   line-height: 220rpx;
 }
 .goods {
-  width: 672rpx;
+  width: 694rpx;
   display: flex;
-  padding: 20rpx 40rpx 20rpx 40rpx;
+  padding: 10rpx 30rpx;
   background-color: white;
-  position: relative;
+  align-items: center;
 }
-.goods image {
+.goods .main {
   width: 180rpx;
   height: 180rpx;
+  margin-left: 20rpx;
 }
 .goods .goods-info {
-  width: 400rpx;
+  width: 450rpx;
   margin-left: 20rpx;
 }
 .goods-info .title {
   overflow: hidden;
   font-size: 24rpx;
+  line-height: 40rpx;
+  height: 80rpx;
 }
 .goods-info .specs {
   font-size: 22rpx;
@@ -73,15 +76,15 @@ scroll-view {
 }
 .goods-info .price {
   color: #EB405D;
-  margin-top: 40rpx;
+  margin-top: 15rpx;
   font-weight: 28rpx;
 }
 .select-btn {
-  position: absolute;
-  border: 1rpx solid #EB405D;
-  border-radius: 0;
-  width: 35rpx;
-  height: 35rpx;
+  box-sizing: border-box;
+  border: 1px solid #EB405D;
+  border-radius: 20rpx;
+  width: 40rpx;
+  height: 40rpx;
   background-color: #F5E3E6;
 }
 .selected {
@@ -92,13 +95,26 @@ scroll-view {
   align-items: center;
 }
 .selected image {
-  width: 30rpx;
-  height: 30rpx;
+  width: 28rpx;
+  height: 28rpx;
+}
+.invalid {
+  width: 55rpx;
+  border-radius: 10rpx;
+  font-size: 20rpx;
+  background-color: #999999;
+  color: #ffffff;
+  text-align: center;
+}
+.invalid-hint {
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  color: #999999;
 }
 .goods .operation-btn-group {
   position: absolute;
   right: 20rpx;
-  bottom: 30rpx;
+  bottom: 60rpx;
   width: 200rpx;
   display: flex;
   justify-content: center;
@@ -134,16 +150,22 @@ scroll-view {
   background-color: white;
 }
 .settlement .selectAll {
-  flex-grow: 1;
-  padding: 25rpx 40rpx;
+  width: 150rpx;
+  padding: 25rpx 30rpx;
   line-height: 40rpx;
   font-size: 24rpx;
-  text-indent: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+.selectAll .text {
+  margin-left: 20rpx;
 }
 .settlement .amount {
-  width: 180rpx;
+  flex-grow: 1;
   line-height: 90rpx;
-  text-align: center;
+  text-align: right;
+  padding-right: 20rpx;
 }
 .settlement .amount text {
   color: #EB4D50;

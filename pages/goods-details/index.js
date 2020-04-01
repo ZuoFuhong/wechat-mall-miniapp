@@ -309,7 +309,7 @@ Page({
   },
   async toAddShopCar() {
     if (this.checkGoodsSelectAndStock()) {
-      const res = await cart.editCart(parseInt(this.data.goodsId, 10), this.data.selectSkuId, this.data.buyNum)
+      const res = await cart.addCart(parseInt(this.data.goodsId, 10), this.data.selectSkuId, this.data.buyNum)
       const { error_code, msg } = res
       if (error_code !== undefined) {
         console.log(msg)
@@ -347,6 +347,9 @@ Page({
     return true
   },
   doAdd() {
+    if (this.data.outofStockStatus) {
+      return
+    }
     let buyNum = this.data.buyNum
     if (buyNum >= 99) {
       wx.showToast({
@@ -360,6 +363,9 @@ Page({
     })
   },
   doReduce() {
+    if (this.data.outofStockStatus) {
+      return
+    }
     let buyNum = this.data.buyNum
     if (buyNum <= 1) {
       return
