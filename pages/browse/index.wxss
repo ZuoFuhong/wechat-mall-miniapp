@@ -10,7 +10,7 @@ page {
   margin-top: 30rpx;
 }
 .empty-l, .empty-r {
-  width: 180rpx;
+  width: 150rpx;
   height: 1px;
   background-color: #999999;
   margin: 20rpx;
@@ -45,10 +45,18 @@ page {
   align-items: center;
   overflow: hidden;
   padding: 20rpx 0;
+  justify-content: space-between;
 }
-.goods-item .img {
+.img {
   width: 160rpx;
   height: 160rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img image {
+  width: 150rpx;
+  height: 150rpx;
 }
 .goods-info {
   height: 128rpx;
@@ -59,7 +67,7 @@ page {
 }
 .goods-item .goods-info .title {
   color: #333;
-  font-size: 28rpx;
+  font-size: 24rpx;
 }
 .goods-item .goods-info .bottom {
   display: flex;
@@ -83,7 +91,7 @@ page {
   position: fixed;
   bottom: 0;
   background-color: #ffffff;
-  height: 80rpx;
+  height: 100rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -91,17 +99,20 @@ page {
   padding-left: 20rpx;
 }
 .operation .l {
+  margin-left: 10rpx;
   display: flex;
   align-items: center;
-  
 }
 .operation .delete-btn {
   width: 200rpx;
   background-color: #EB405D;
   color: #ffffff;
-  height: 80rpx;
-  line-height: 80rpx;
+  height: 100rpx;
+  line-height: 100rpx;
   text-align: center;
+}
+.tick-box {
+  width: 80rpx;
 }
 /* 单选按钮 */
 .radio {
@@ -109,15 +120,31 @@ page {
   height: 40rpx;
   border: 1px solid #D8D8D8;
   border-radius: 40rpx;
-  margin-right: 20rpx;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 .checked {
   border-color: #EB405D;
+  background-color: #EB405D;
 }
 .radio image {
   width: 24rpx;
   height: 24rpx;
+}
+.morePlace{
+  width: 100%;
+  padding: 30rpx 0rpx 60rpx;
+  background-color: #fff;
+  color: rgba(0,0,0,.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24rpx;
+}
+.morePlace .l,.r {
+  width: 150rpx;
+  height: 1px;
+  background-color: rgba(0,0,0,.3);
+  margin: 0 20rpx;
 }

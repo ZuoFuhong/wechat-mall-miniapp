@@ -1,36 +1,48 @@
-<view class="empty" wx:if="{{list.length === 0}}">
+<view class="empty" wx:if="{{history.length === 0}}">
   <view class="empty-l"></view>
   <view>最近没有浏览过商品</view>
   <view class="empty-r"></view>
 </view>
-<view class="browse" wx:if="{{list.length !== 0}}">
+<view class="browse" wx:if="{{history.length !== 0}}">
   <view class="manager">
     <view class="btn" bindtap="close" wx:if="{{editStatus}}">完成</view>
     <view class="btn" bindtap="edit" wx:if="{{!editStatus}}">管理</view>
   </view>
-  <view class="item" wx:for="{{list}}">
+  <view class="item" wx:for="{{history}}">
     <view class="date">{{item.date}}</view>
     <view class="list">
       <view class="goods-item" wx:for="{{item.goodsList}}" wx:for-item="goodsItem">
-        <view class="radio" wx:if="{{editStatus}}"></view>
-        <navigator wx:key="id" url="/pages/goods-details/index?id={{goodsItem.id}}">
-          <image class="img" mode="aspectFill" src="{{goodsItem.picture}}"></image>
+        <view class="tick-box" wx:if="{{editStatus}}">
+          <view class="radio {{selectRecord[goodsItem.id] ? 'checked' : ''}}" data-id="{{goodsItem.id}}" bindtap="doSelectRecord">
+            <image src="/images/icon/selected.svg" />
+          </view>
+        </view>
+        <navigator wx:key="id" url="/pages/goods-details/index?id={{goodsItem.goodsId}}">
+          <view class="img">
+            <image src="{{goodsItem.picture}}" />
+          </view>
           <view class="goods-info">
-            <view class="title">{{goodsItem.name}}</view>
+            <view class="title">{{goodsItem.title}}</view>
             <view class="bottom">
               <view class="price">¥ {{goodsItem.price}}</view>
-              <view class="saleNum"> {{goodsItem.saleNum}}人付款</view>
             </view>
           </view>
         </navigator>
       </view>
     </view>
   </view>
+  <view class="morePlace" hidden="{{loadingMoreHidden ? true : false}}">
+    <view class="l"></view>
+    <view>没有更多啦</view>
+    <view class="r"></view>
+  </view>
   <view class="operation" wx:if="{{editStatus}}">
     <view class="l">
-      <view class="radio"></view>
-      <view>全选</view>
+      <view class="radio {{selectAll ? 'checked' : ''}}" bindtap="doSelectAll">
+        <image src="/images/icon/selected.svg" />
+      </view>
+      <view style="margin-left: 10rpx;">全选</view>
     </view>
-    <view class="delete-btn">删除</view>
+    <view class="delete-btn" bindtap="deleteRecord">删除</view>
   </view>
 </view>
