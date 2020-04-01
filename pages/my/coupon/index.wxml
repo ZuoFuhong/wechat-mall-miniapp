@@ -1,38 +1,30 @@
 <view class="container">
   <view class="nav-tab">
-    <view class="tab-item">
-      <view class="name">未使用</view>
-      <view class="border"></view>
+    <view class="tab-item {{status === 0 ? 'checked' : ''}}">
+      <view class="name" data-id="0" bindtap="switchStatus">未使用</view>
+      <view class="border {{status === 0 ? 'checked' : ''}}"></view>
     </view>
-    <view class="tab-item checked">
-      <view class="name">已使用</view>
-      <view class="border checked"></view>
+    <view class="tab-item {{status === 1 ? 'checked' : ''}}">
+      <view class="name" data-id="1" bindtap="switchStatus">已使用</view>
+      <view class="border {{status === 1 ? 'checked' : ''}}"></view>
     </view>
-    <view class="tab-item">
-      <view class="name">已过期</view>
-      <view class="border"></view>
+    <view class="tab-item {{status === 2 ? 'checked' : ''}}">
+      <view class="name" data-id="2" bindtap="switchStatus">已过期</view>
+      <view class="border {{status === 2 ? 'checked' : ''}}"></view>
     </view>
   </view>
   <view class="coupons">
-    <view class="coupon">
-      <image class="bg-image" src="/images/coupon/coupon-bg.svg" />
-      <view class="amount">￥ 180 <text>满1590减180</text></view>
+    <view class="coupon" wx:for="{{coupons}}">
+      <image wx:if="{{status === 0}}" class="bg-image" src="/images/coupon/coupon-bg.svg" />
+      <image wx:if="{{status === 1}}" class="bg-image" src="/images/coupon/yet-use.svg" />
+      <image wx:if="{{status === 2}}" class="bg-image" src="/images/coupon/overdue.svg" />
+      <view class="amount" style="{{status === 0 ? '' : status === 1 ? 'color: #666666;' : 'color: #BBBBBB;'}}">{{item.amount}} <text>{{item.title}}</text></view>
       <view class="use-scope">全场所有商品通用</view>
-      <view class="take-btn">
+      <view class="take-btn" wx:if="{{status === 0}}" bindtap="goShopping">
         <view>立即</view>
-        <view>领券</view>
+        <view>使用</view>
       </view>
-      <view class="deadline">6/30-7/31</view>
-    </view>
-    <view class="coupon">
-      <image class="bg-image" src="/images/coupon/coupon-bg.svg" />
-      <view class="amount">￥ 180 <text>满1590减180</text></view>
-      <view class="use-scope">全场所有商品通用</view>
-      <view class="take-btn">
-        <view>立即</view>
-        <view>领券</view>
-      </view>
-      <view class="deadline">6/30-7/31</view>
+      <view class="deadline">{{item.period}}</view>
     </view>
   </view>
 </view>
