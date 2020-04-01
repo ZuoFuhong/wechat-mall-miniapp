@@ -5,11 +5,11 @@
 </view>
 <view class="address-list" wx:if="{{addressList.length !== 0}}">
   <view class="address" wx:for="{{addressList}}">
-    <view>{{item.nickname}}<text class="phone">{{item.mobile}}</text></view>
+    <view>{{item.contacts}}<text class="phone">{{item.mobile}}</text></view>
     <view class="detail">{{item.detail}}</view>
     <view class="default">
       <view class="l">
-        <view class="radio" wx:if="{{item.isDefault === 0}}"></view>
+        <view class="radio" wx:if="{{item.isDefault === 0}}" data-id="{{item.id}}" bindtap="defaultAddress"></view>
         <view class="radio checked" wx:if="{{item.isDefault === 1}}">
           <image src="/images/order/tick.svg" />
         </view>
