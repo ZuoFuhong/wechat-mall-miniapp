@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="20px" viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>编组</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="我的-已授权" transform="translate(-24.000000, -408.000000)" stroke="#EB405D">
+            <g id="编组" transform="translate(25.000000, 409.000000)">
+                <path d="M17,7 C17,3.13400675 13.6421356,0 9.5,0 C5.35786438,0 2,3.13400675 2,7" id="路径"></path>
+                <rect id="矩形" x="0" y="7" width="4" height="5" rx="2"></rect>
+                <path d="M9.5,14 C10.3284271,14 11,14.6715729 11,15.5 L11,17.5 C11,18.3284271 10.3284271,19 9.5,19 C8.67157288,19 8,18.3284271 8,17.5 L8,15.5 C8,14.6715729 8.67157288,14 9.5,14 Z" id="矩形" transform="translate(9.500000, 16.500000) rotate(90.000000) translate(-9.500000, -16.500000) "></path>
+                <rect id="矩形" x="15" y="7" width="4" height="5" rx="2"></rect>
+                <path d="M17,12 C16.1812865,14.6666667 14.5146199,16 12,16" id="路径-34"></path>
+            </g>
+        </g>
+    </g>
+</svg>

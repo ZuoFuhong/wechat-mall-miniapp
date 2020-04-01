@@ -47,5 +47,10 @@
       <view class="name">历史浏览</view>
       <image class="next-level" src="/images/icon/next-level.svg" />
     </view>
+    <view class="tab-item" bindtap="callShopPhone">
+      <image src="/images/my/kf.svg" />
+      <view class="name">联系客服</view>
+      <image class="next-level" src="/images/icon/next-level.svg" />
+    </view>
   </view>
 </view>

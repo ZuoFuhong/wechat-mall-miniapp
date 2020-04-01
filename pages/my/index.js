@@ -1,4 +1,6 @@
 import user from '../../models/user'
+import config from '../../config'
+
 Page({
 	data: {
     userInfo: {}
@@ -54,6 +56,11 @@ Page({
   goMyBrowse() {
     wx.navigateTo({
       url: '/pages/browse/index'
+    })
+  },
+  callShopPhone() {
+    wx.makePhoneCall({
+      phoneNumber: config.phoneNumber
     })
   }
 })
