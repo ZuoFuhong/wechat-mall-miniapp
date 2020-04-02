@@ -13,6 +13,10 @@ class Order {
     return get(`/api/order/list?status=${status}&page=${page}&size=${size}`)
   }
 
+  async getOrderDetail(orderNo) {
+    return get(`/api/order/detail?orderNo=${orderNo}`)
+  }
+
   async deleteOrder(id) {
     return _delete(`/api/order?id=${id}`)
   }
@@ -23,6 +27,12 @@ class Order {
 
   async confirmTakeGoods(id) {
     return put(`/api/order/confirm_goods?id=${id}`)
+  }
+
+  async refundApply(orderNo, reason) {
+    return put('/api/order/refund', {
+      orderNo, reason
+    })
   }
 }
 

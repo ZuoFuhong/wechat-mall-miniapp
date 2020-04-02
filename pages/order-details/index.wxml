@@ -2,23 +2,23 @@
   <div class="address">
     <image src="/images/order/address-icon.svg" />
     <view class="info">
-      <view>大左<text class="phone">139232893</text></view>
-      <view class="detail">武汉市 东湖高新区1001号</view>
+      <view>{{orderDetail.address.contacts}}<text class="phone">{{orderDetail.address.mobile}}</text></view>
+      <view class="detail">{{orderDetail.address.provinceStr}} {{orderDetail.address.cityStr}} {{orderDetail.address.areaStr}} {{orderDetail.address.address}}</view>
     </view>
   </div>
   <view class="goods-info">
     <view class="title">商品信息</view>
     <view class="goods-list">
-      <navigator wx:for="{{goodsList}}" url="/pages/goods-details/index?id={{item.goodsId}}">
+      <navigator wx:for="{{orderDetail.goodsList}}" url="/pages/goods-details/index?id={{goodsItem.goodsId}}" wx:for-item="goodsItem">
         <view class="goods">
-          <image src="{{item.picture}}" />
+          <image src="{{goodsItem.picture}}" />
           <view class="info">
-            <view class="name">{{item.title}}</view>
-            <view class="specs">{{item.specs}}</view>
+            <view class="name">{{goodsItem.title}}</view>
+            <view class="specs">{{goodsItem.specs}}</view>
           </view>
           <view class="amount">
-            <view class="price">￥{{item.price}}</view>
-            <view class="num">x {{item.num}}</view>
+            <view class="price">￥{{goodsItem.price}}</view>
+            <view class="num">x {{goodsItem.num}}</view>
           </view>
         </view>
       </navigator>
@@ -26,74 +26,49 @@
     <view class="cast-detail">
       <view class="cost-item">
         <view>商品总价</view>
-        <view>￥ 1289.23</view>
+        <view>￥ {{orderDetail.goodsAmount}}</view>
       </view>
       <view class="cost-item">
         <view>优惠金额</view>
-        <view>￥ 189.23</view>
+        <view>- ￥ {{orderDetail.discountAmount}}</view>
       </view>
       <view class="cost-item">
         <view>运费</view>
-        <view>￥ 189.23</view>
+        <view>￥ {{orderDetail.dispatchAmount}}</view>
       </view>
       <view class="cost-item actual">
         <view>实付款（含运费）</view>
-        <view style="color: #EB405D;">￥ 189.23</view>
+        <view style="color: #EB405D;">￥ {{orderDetail.payAmount}}</view>
       </view>
     </view>
   </view>
   <view class="order-info">
     <view class="title">订单信息</view>
     <view class="order-item orderNo">
-      <view>订单编号：230283028308</view>
+      <view>订单编号：{{orderDetail.orderNo}}</view>
       <view style="color: #EB405D;">复制</view>
     </view>
-    <view class="order-item">下单时间：2020-03-27 12:30:49</view>
-    <view class="order-item">付款时间：2020-03-27 12:30:49</view>
-    <view class="order-item">发货时间：2020-03-27 12:30:49</view>
-    <view class="order-item">成交时间：2020-03-27 12:30:49</view>
+    <view class="order-item">下单时间：{{orderDetail.placeTime}}</view>
+    <view class="order-item" wx:if="{{orderDetail.status > 0}}">付款时间：{{orderDetail.payTime}}</view>
+    <view class="order-item" wx:if="{{orderDetail.status === 2 || orderDetail.status === 3 }}">发货时间：{{orderDetail.deliverTime}}</view>
+    <view class="order-item" wx:if="{{orderDetail.status === -1 || orderDetail.status === 3 || orderDetail.status === 5}}">成交时间：{{orderDetail.finishTime}}</view>
   </view>
   <view class="btn-group">
-    <view class="btn" bindtap="refund">退款</view>
-    <view class="btn">删除订单</view>
+    <view class="btn" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === 0}}" bindtap="cancelOrder">取消订单</view>
+    <view class="btn active" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === 0}}" bindtap="orderPay">付款</view>
+    <view class="btn active" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === 1}}" bindtap="orderRefund">退款</view>
+    <view class="btn active" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === 2}}" bindtap="confirmTakeGoods">确认收货</view>
+    <view class="btn" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === -1 || orderDetail.status === 3 || orderDetail.status === 5}}" bindtap="deleteOrderRecord">删除订单</view>
   </view>
 </view>
 <view class="shade" wx:if="{{refundPopup}}" bindtap="closePopup">
   <view class="refound-reason" catchtap="stopPropagation">
     <view class="title">退款原因</view>
     <view class="reason">
-      <view class="item">
-        <view>订单信息拍错（规格/尺码/颜色等）</view>
-        <view wx:if="{{selectReason !== 1}}" class="radio" data-id="1" catchtap="selectReason"></view>
-        <view wx:if="{{selectReason === 1}}" class="radio checked" data-id="1" catchtap="selectReason">
-          <image src="/images/order/tick.svg" />
-        </view>
-      </view>
-      <view class="item">
-        <view>我不想要了</view>
-        <view wx:if="{{selectReason !== 2}}" class="radio" data-id="2" catchtap="selectReason"></view>
-        <view wx:if="{{selectReason === 2}}" class="radio checked" data-id="2" catchtap="selectReason">
-          <image src="/images/order/tick.svg" />
-        </view>
-      </view>
-      <view class="item">
-        <view>地址/电话信息填写错误</view>
-        <view wx:if="{{selectReason !== 3}}" class="radio" data-id="3" catchtap="selectReason"></view>
-        <view wx:if="{{selectReason === 3}}" class="radio checked" data-id="3" catchtap="selectReason">
-          <image src="/images/order/tick.svg" />
-        </view>
-      </view>
-      <view class="item">
-        <view>没用/少用优惠</view>
-        <view wx:if="{{selectReason !== 4}}" class="radio" data-id="4" catchtap="selectReason"></view>
-        <view wx:if="{{selectReason === 4}}" class="radio checked" data-id="4" catchtap="selectReason">
-          <image src="/images/order/tick.svg" />
-        </view>
-      </view>
-      <view class="item">
-        <view>缺货</view>
-        <view wx:if="{{selectReason !== 5}}" class="radio" data-id="5" catchtap="selectReason"></view>
-        <view wx:if="{{selectReason === 5}}" class="radio checked" data-id="5" catchtap="selectReason">
+      <view class="item" wx:for="{{refundReason}}">
+        <view>{{item.reason}}</view>
+        <view wx:if="{{selectReason !== item.id}}" class="radio" data-id="{{item.id}}" catchtap="selectReason"></view>
+        <view wx:if="{{selectReason === item.id}}" class="radio checked" data-id="{{item.id}}" catchtap="selectReason">
           <image src="/images/order/tick.svg" />
         </view>
       </view>

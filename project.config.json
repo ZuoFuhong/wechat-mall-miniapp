@@ -113,10 +113,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 9,
 					"name": "订单详情",
 					"pathName": "pages/order-details/index",
-					"query": "",
+					"query": "orderNo=20200402162131155859",
 					"scene": null
 				},
 				{

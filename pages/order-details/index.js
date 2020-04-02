@@ -1,31 +1,59 @@
+import order from '../../models/order'
+
 Page({
   data: {
+    orderNo: '',
     refundPopup: false,
     selectReason: 0,
-    goodsList: [
+    orderDetail: {},
+    refundReason: [
       {
-        goodsId: 1,
-        picture: 'https://dcdn.it120.cc/2019/12/29/2e79921a-92b3-4d1d-8182-cb3d524be5fb.png',
-        title: '北欧简约立式台灯北欧简约立式',
-        specs: '3m;黑色;可调节',
-        price: '289',
-        num: 1
+        id: 1,
+        reason: '我不想买了'
       },
       {
-        goodsId: 1,
-        picture: 'https://dcdn.it120.cc/2019/12/29/2e79921a-92b3-4d1d-8182-cb3d524be5fb.png',
-        title: '北欧简约立式台灯北欧简约立式',
-        specs: '3m;黑色;可调节',
-        price: '289',
-        num: 1
+        id: 2,
+        reason: '信息填写错误，重新拍'
+      },
+      {
+        id: 3,
+        reason: '卖家缺货'
+      },
+      {
+        id: 4,
+        reason: '同城见面交易'
+      },
+      {
+        id: 5,
+        reason: '其它原因'
       }
     ]
+  },
+  onLoad(e) {
+    this.setData({
+      orderNo: e.orderNo || ''
+    })
+    this.loadOrderDetail()
   },
   onShow() {
     this.closePopup()
     console.log('刷新订单详情')
   },
-  refund() {
+  // 加载订单
+  async loadOrderDetail() {
+    const res = await order.getOrderDetail(this.data.orderNo)
+    const { error_code, msg } = res
+    if (error_code !== undefined) {
+      console.log(msg)
+      return
+    }
+    this.setData({
+      orderDetail: res
+    })
+  },
+  // 退款申请
+  orderRefund(e) {
+    const orderId = e.currentTarget.dataset.id
     wx.setNavigationBarTitle({
       title: '退款申请'
     })
@@ -33,8 +61,35 @@ Page({
       refundPopup: true
     })
   },
+  // 确认退款
+  async confirmRefund() {
+    const reasonId = this.data.selectReason
+    if (reasonId === 0) {
+      wx.showToast({
+        title: '请选择退款原因',
+        icon: 'none'
+      })
+      return
+    }
+    const refundReason = this.data.refundReason
+    let reason = ''
+    for (let i = 0; i < refundReason.length; i++) {
+      if (refundReason[i].id === reasonId) {
+        reason = refundReason[i].reason
+      }
+    }
+    const res = await order.refundApply(this.data.orderNo, reason)
+    const { error_code, msg } = res
+    if (error_code !== undefined) {
+      console.log(msg)
+      return      
+    }
+    wx.navigateTo({
+      url: '/pages/refund-details/index?refundNo=' + res.refundNo
+    })
+  },
   stopPropagation() {
-    // nothing to do
+    // 阻止冒泡
   },
   closePopup() {
     wx.setNavigationBarTitle({
@@ -50,18 +105,72 @@ Page({
       selectReason: parseInt(e.currentTarget.dataset.id, 10)
     })
   },
-  confirmRefund() {
-    const reason = this.data.selectReason
-    if (reason === 0) {
-      wx.showToast({
-        title: '请选择退款原因',
-        icon: 'none'
-      })
-    } else {
-      // todo: 发起退款，退款成功跳转
-      wx.navigateTo({
-        url: '/pages/refund-details/index?orderNo=23423'
-      })
-    }
-  }
+  async cancelOrder(e) {
+    const that = this
+    wx.showModal({
+      title: '取消订单',
+      content: '确认取消订单？',
+      success(res) {
+        if (res.confirm) {
+          const orderId = e.currentTarget.dataset.id
+          order.cancelOrder(orderId).then(res => {
+            const { error_code, msg } = res
+            if (error_code !== undefined) {
+              console.log(msg)
+              return
+            }
+            that.loadOrderDetail()
+          })
+        }
+      }
+    })
+  },
+  async deleteOrderRecord(e) {
+    const that = this
+    wx.showModal({
+      title: '删除订单',
+      content: '确认删除订单？',
+      success(res) {
+        if (res.confirm) {
+          const orderId = e.currentTarget.dataset.id
+          order.deleteOrder(orderId).then(res => {
+            const { error_code, msg } = res
+            if (error_code !== undefined) {
+              console.log(msg)
+              return
+            }
+            wx.navigateBack()
+          })
+        }
+      }
+    })
+  },
+  async confirmTakeGoods(e) {
+    const that = this
+    wx.showModal({
+      title: "确认收货",
+      content: '确认已经收到商品？',
+      success(res) {
+        if (res.confirm) {
+          const orderId = e.currentTarget.dataset.id
+          order.confirmTakeGoods(orderId).then(res => {
+            const { error_code, msg } = res
+            if (error_code !== undefined) {
+              console.log(msg)
+              return
+            }
+            that.loadOrderDetail()
+          })
+        }
+      }
+    })
+  },
+  // 支付窗口
+  async orderPay(e) {
+    console.log(e.currentTarget.dataset.id)
+    wx.showToast({
+      icon: 'none',
+      title: '演示环境，不支持微信支付'
+    })
+  },
 })

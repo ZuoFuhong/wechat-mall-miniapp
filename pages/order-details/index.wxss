@@ -40,7 +40,7 @@ page {
 .goods-list .goods {
   border-top: 1px solid #F7F7F7;
   display: flex;
-  padding: 20rpx
+  padding: 20rpx 0;
 }
 .goods image {
   width: 120rpx;
@@ -48,19 +48,24 @@ page {
 }
 .goods .info {
   font-size: 24rpx;
-  width: 380rpx;
+  width: 400rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-start;
   margin-left: 20rpx;
 }
+.info .name {
+  height: 80rpx;
+  line-height: 40rpx;
+  overflow: hidden;
+}
 .info .specs {
-  display: inline;
   background-color: #F3F3F3;
   padding: 5rpx 10rpx;
   font-size: 22rpx;
   color: #999999;
+  margin-top: 5rpx;
 }
 .goods .amount {
   flex-grow: 1;
@@ -82,9 +87,11 @@ page {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #999999;
 }
 .cast-detail .actual {
   font-size: 24rpx;
+  color: black;
 }
 
 .order-info {
@@ -128,6 +135,10 @@ page {
   color: #666666;
   font-size: 24rpx;
   margin-right: 30rpx;
+}
+.btn-group .active {
+  border: 1px solid #EB405D;
+  color: #EB405D;
 }
 .navigator-hover {
   background-color: #ffffff;

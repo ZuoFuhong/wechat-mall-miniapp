@@ -1,5 +1,6 @@
 Page({
   data: {
+    refundNo: '',
     goodsList: [
       {
         goodsId: 1,
@@ -18,6 +19,12 @@ Page({
         num: 1
       }
     ]
+  },
+  onLoad(e) {
+    console.log(e)
+    this.setData({
+      refundNo: e.refundNo
+    })
   },
   cancelApply() {
     console.log('撤销申请')

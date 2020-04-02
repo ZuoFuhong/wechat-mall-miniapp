@@ -5,7 +5,8 @@ Page({
     status: 0,
     curPage: 0,
     pageSize: 10,
-    orderList: []
+    orderList: [],
+    loadingMoreHidden: true
   },
   onLoad(res) {
     this.setData({
@@ -13,9 +14,12 @@ Page({
     })
   },
   onShow() {
+    this.setData({
+      curPage: 0
+    })
     this.loadOrderList()
   },
-  // 加载订单
+  // 加载订单列表
   async loadOrderList() {
     const curPage = this.data.curPage + 1
     const res = await order.getOrderList(this.data.status, curPage, this.data.pageSize)
@@ -31,12 +35,18 @@ Page({
       orderList = orderList.concat(res.list)
     }
     this.setData({
-      orderList: orderList
+      orderList: orderList,
+      curPage: curPage,
+      loadingMoreHidden: res.list.length === this.data.pageSize
     })
   },
-  // 拉起支付窗口
+  // 支付窗口
   async orderPay(e) {
     console.log(e.currentTarget.dataset.id)
+    wx.showToast({
+      icon: 'none',
+      title: '演示环境，不支持微信支付'
+    })
   },
   async cancelOrder(e) {
     const that = this
@@ -52,6 +62,9 @@ Page({
               console.log(msg)
               return
             }
+            that.setData({
+              curPage: 0
+            })
             that.loadOrderList()
           })
         }
@@ -72,6 +85,9 @@ Page({
               console.log(msg)
               return
             }
+            that.setData({
+              curPage: 0
+            })
             that.loadOrderList()
           })
         }
@@ -92,6 +108,9 @@ Page({
               console.log(msg)
               return
             }
+            that.setData({
+              curPage: 0
+            })
             that.loadOrderList()
           })
         }
@@ -105,8 +124,15 @@ Page({
       return
     }
     this.setData({
+      curPage: 0,
       status: parseInt(status, 10)
     })
     this.loadOrderList()
-  }
+  },
+  onReachBottom: function() {
+    if (!this.data.loadingMoreHidden) {
+      return
+    }
+    this.loadOrderList()
+  },
 })

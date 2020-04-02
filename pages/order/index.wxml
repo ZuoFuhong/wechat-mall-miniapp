@@ -27,7 +27,7 @@
   </view>
   <view class="order-list" wx:if="{{orderList.length > 0}}">
     <view class="order-item" wx:for="{{orderList}}">
-      <navigator url="/pages/order-details/index?id={{item.id}}">
+      <navigator url="/pages/order-details/index?orderNo={{item.orderNo}}">
         <view class="top">
           <view class="order-no">订单编号：{{item.orderNo}}</view>
           <view wx:if="{{item.status === -1}}" class="finish">交易关闭</view>
@@ -55,13 +55,17 @@
       <view class="bottom">
         <view class="goods-num">共{{item.goodsNum}}件商品<text style="margin-left: 20rpx;">实付 <text class="amount">￥{{item.payAmount}}</text></text></view>
         <view class="btn-group">
-          <view class="btn delete" wx:if="{{item.status === 0}}" data-id="{{item.id}}" bindtap="cancelOrder">取消订单</view>
-          <view class="btn orderPay" wx:if="{{item.status === 0}}" data-id="{{item.id}}" bindtap="orderPay">付款</view>
-          <!-- <view class="btn delete" wx:if="{{item.status === 2}}" data-id="{{item.id}}" bindtap="confirmReceive">查看物流</view> -->
-          <view class="btn orderPay" wx:if="{{item.status === 2}}" data-id="{{item.id}}" bindtap="confirmTakeGoods">确认收货</view>
-          <view class="btn delete" wx:if="{{item.status === -1 || item.status === 3 || item.status === 5}}" data-id="{{item.id}}" bindtap="deleteOrderRecord">删除订单</view>
+          <view class="btn" wx:if="{{item.status === 0}}" data-id="{{item.id}}" bindtap="cancelOrder">取消订单</view>
+          <view class="btn active" wx:if="{{item.status === 0}}" data-id="{{item.id}}" bindtap="orderPay">付款</view>
+          <view class="btn active" wx:if="{{item.status === 2}}" data-id="{{item.id}}" bindtap="confirmTakeGoods">确认收货</view>
+          <view class="btn" wx:if="{{item.status === -1 || item.status === 3 || item.status === 5}}" data-id="{{item.id}}" bindtap="deleteOrderRecord">删除订单</view>
         </view>
       </view>
     </view>
+  </view>
+  <view class="morePlace" wx:if="{{curPage > 1 && !loadingMoreHidden}}">
+    <view class="l"></view>
+    <view>没有更多啦</view>
+    <view class="r"></view>
   </view>
 </view>

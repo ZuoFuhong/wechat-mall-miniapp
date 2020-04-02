@@ -197,6 +197,14 @@ Page({
     // todo: 拿到预支付ID，拉起支付窗口，支付成功跳转订单详情页
     // {"orderNo":"20200402162131155859","prepayId":"20200402162131155859"}
     console.log(res)
+    wx.showToast({
+      title: '模拟支付成功'
+    })
+    setTimeout(function () {
+      wx.navigateTo({
+        url: '/pages/order-details/index?orderNo=' + res.orderNo
+      })
+    }, 1500)
   },
   scrolltolowerEvent() {
     if (!this.data.hasMoreCoupon) {
