@@ -11,7 +11,8 @@ Page({
     selectNum: 0, // 结算数量
     lock: false   // 锁，防止按钮高频点击
   },
-  onLoad() {
+  async onLoad() {
+    wx.removeStorageSync("goods")
   },
   async onShow() {
     await this.loadCartList()
@@ -38,6 +39,9 @@ Page({
       }
       res.list[i].specs = specs.substring(0, specs.length - 2)
       // 选中状态
+      if (this.data.selectCart[cart.id]) {
+        continue
+      }
       this.data.selectCart[cart.id] = false
     }
     this.setData({
@@ -169,5 +173,29 @@ Page({
   onPullDownRefresh() {
     this.loadCartList()
     wx.stopPullDownRefresh()
+  },
+  goSettlement() {
+    if (this.data.selectNum === 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '请选择结算的商品'
+      })
+      return
+    }
+    // 提取结算的商品，通过缓存传递数据
+    const goodsList = this.data.goodsList
+    const selectCart = this.data.selectCart
+    const selectGoods = []
+    for (let i = 0; i < goodsList.length; i++) {
+      const goods = goodsList[i]
+      if (selectCart[goods.id]) {
+        selectGoods.push(goods)
+      }
+    }
+    // 通过缓存传递数据
+    wx.setStorageSync("goods", selectGoods)
+    wx.navigateTo({
+      url: '/pages/settlement/index'
+    })
   }
 })

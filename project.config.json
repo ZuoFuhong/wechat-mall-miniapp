@@ -146,6 +146,20 @@
 					"pathName": "pages/browse/index",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "提交订单（结算）",
+					"pathName": "pages/settlement/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "选择-我的地址",
+					"pathName": "pages/option-address/index",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

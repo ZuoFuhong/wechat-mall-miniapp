@@ -31,11 +31,11 @@
       </view>
     </view>
   </view>
-  <view class="morePlace" hidden="{{loadingMoreHidden ? true : false}}">
+  <!-- <view class="morePlace" hidden="{{loadingMoreHidden ? true : false}}">
     <view class="l"></view>
     <view>没有更多啦</view>
     <view class="r"></view>
-  </view>
+  </view> -->
   <view class="operation" wx:if="{{editStatus}}">
     <view class="l">
       <view class="radio {{selectAll ? 'checked' : ''}}" bindtap="doSelectAll">

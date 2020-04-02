@@ -39,6 +39,6 @@
       <view class="text">全选</view>
     </view>
     <view class="amount">合计<text>￥{{amount}}</text></view>
-    <view class="confirm-btn">结算({{selectNum}})</view>
+    <view class="confirm-btn" bindtap="goSettlement">结算({{selectNum}})</view>
   </view>
 </view>

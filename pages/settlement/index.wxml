@@ -1,0 +1,51 @@
+<view class="settlement">
+  <view class="address">
+    <view class="select-address" data-id="0" wx:if="{{address.id === 0}}" bindtap="selectAddress">
+      <image src="/images/address/position-red.svg" />
+      <view class="text">选择地址</view>
+    </view>
+    <view class="address-info" wx:if="{{address.id !== 0}}">
+      <image class="position" src="/images/address/position-black.svg" />
+      <view class="info">
+        <view class="contacts">{{address.contacts}}<text class="mobile">{{address.mobile}}</text></view>
+        <view class="detail">{{address.provinceStr}} {{address.cityStr}} {{address.areaStr}} {{address.address}}</view>
+      </view>
+      <image class="next-level" src="/images/icon/next-level.svg" data-id="{{address.id}}" bindtap="selectAddress"/>
+    </view>
+    <image class="border" src="/images/address/border.svg" />
+  </view>
+  <view class="goods-list">
+    <view class="goods" wx:for="{{goodsList}}" wx:for-item="goodsItem">
+      <image src="{{goodsItem.picture}}" />
+      <view class="info">
+        <view class="title">{{goodsItem.title}}</view>
+        <view class="specs">{{goodsItem.specs}}</view>
+      </view>
+      <view class="amount">
+        <view class="price">￥{{goodsItem.price}}</view>
+        <view class="num">x {{goodsItem.num}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="coupons">
+    <view class="title">
+      <view class="l">优惠券</view>
+      <view class="r">可使用({{couponList.length}})</view>
+    </view>
+    <view class="coupon-list">
+      <scroll-view scroll-y="true" style="height: 220rpx;" bindscrolltolower="scrolltolowerEvent">
+        <view class="coupon" wx:for="{{couponList}}">
+          <view class="select-btn {{selectedCoupon.cLogId === item.cLogId ? 'selected' : ''}}" data-id="{{item.cLogId}}" bindtap="selectCoupon">
+            <image src="/images/icon/selected.svg" />
+          </view>
+          <view class="desc">{{item.title}}</view>
+          <view class="period">{{item.period}}</view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+  <view class="bottom">
+    <view class="amount">合计 <text style="color: red;">￥{{amount}}</text></view>
+    <view class="btn" bindtap="submitOrder">提交订单</view>
+  </view>
+</view>

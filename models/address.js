@@ -19,6 +19,10 @@ class Address {
       id, contacts, mobile, provinceId, cityId, areaId, provinceStr, cityStr, areaStr, address, isDefault
     })
   }
+
+  async getDefaultAddress() {
+    return get('/api/user/default_address')
+  }
 }
 
 export default new Address()
