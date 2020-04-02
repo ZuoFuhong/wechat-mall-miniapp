@@ -10,7 +10,7 @@
   <view class="order-panel">
     <view class="top">
       <view class="title">我的订单</view>
-      <view class="more" bindtap="goMyOrder">查看全部 <image src="/images/icon/next-level.svg" /></view>
+      <view class="more" data-id="-999" bindtap="goMyOrder">查看全部 <image src="/images/icon/next-level.svg" /></view>
     </view>
     <view class="order-btn-panel">
       <view class="btn-item" data-id="0" bindtap="goMyOrder">

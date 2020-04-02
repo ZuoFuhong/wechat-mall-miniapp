@@ -1,24 +1,24 @@
 <view class="container">
   <view class="nav-tab">
-    <view class="tab-item">
+    <view class="tab-item {{status === -999 ? 'checked' : ''}}" data-status="-999" bindtap="switchStatus">
       <view class="name">全部</view>
-      <view class="border"></view>
+      <view class="border {{status === -999 ? 'checked' : ''}}"></view>
     </view>
-    <view class="tab-item checked">
+    <view class="tab-item {{status === 0 ? 'checked' : ''}}" data-status="0" bindtap="switchStatus">
       <view class="name">待付款</view>
-      <view class="border checked"></view>
+      <view class="border {{status === 0 ? 'checked' : ''}}"></view>
     </view>
-    <view class="tab-item">
+    <view class="tab-item {{status === 1 ? 'checked' : ''}}" data-status="1" bindtap="switchStatus">
       <view class="name">待发货</view>
-      <view class="border"></view>
+      <view class="border {{status === 1 ? 'checked' : ''}}"></view>
     </view>
-    <view class="tab-item">
+    <view class="tab-item {{status === 2 ? 'checked' : ''}}" data-status="2" bindtap="switchStatus">
       <view class="name">待收货</view>
-      <view class="border"></view>
+      <view class="border {{status === 2 ? 'checked' : ''}}"></view>
     </view>
-    <view class="tab-item">
+    <view class="tab-item {{status === 3 ? 'checked' : ''}}" data-status="3" bindtap="switchStatus">
       <view class="name">已完成</view>
-      <view class="border"></view>
+      <view class="border {{status === 3 ? 'checked' : ''}}"></view>
     </view>
   </view>
   <view class="empty-order" wx:if="{{orderList.length === 0}}">
@@ -30,8 +30,13 @@
       <navigator url="/pages/order-details/index?id={{item.id}}">
         <view class="top">
           <view class="order-no">订单编号：{{item.orderNo}}</view>
-          <!-- 状态组 -->
-          <view class="finish">已完成</view>
+          <view wx:if="{{item.status === -1}}" class="finish">交易关闭</view>
+          <view wx:if="{{item.status === 0}}" class="finish">待付款</view>
+          <view wx:if="{{item.status === 1}}" class="finish">待发货</view>
+          <view wx:if="{{item.status === 2}}" class="finish">待收货</view>
+          <view wx:if="{{item.status === 3}}" class="finish">交易成功</view>
+          <view wx:if="{{item.status === 4}}" class="finish">退款中</view>
+          <view wx:if="{{item.status === 5}}" class="finish">交易关闭</view>
         </view>
         <view class="goods-list">
           <view class="goods" wx:for="{{item.goodsList}}" wx:for-item="goodsItem">
@@ -50,8 +55,11 @@
       <view class="bottom">
         <view class="goods-num">共{{item.goodsNum}}件商品<text style="margin-left: 20rpx;">实付 <text class="amount">￥{{item.payAmount}}</text></text></view>
         <view class="btn-group">
-          <view class="btn orderPay" data-orderno="{{item.orderNo}}" bindtap="orderPay">付款</view>
-          <view class="btn delete" data-orderno="{{item.orderNo}}" bindtap="deleteOrder">删除订单</view>
+          <view class="btn delete" wx:if="{{item.status === 0}}" data-id="{{item.id}}" bindtap="cancelOrder">取消订单</view>
+          <view class="btn orderPay" wx:if="{{item.status === 0}}" data-id="{{item.id}}" bindtap="orderPay">付款</view>
+          <!-- <view class="btn delete" wx:if="{{item.status === 2}}" data-id="{{item.id}}" bindtap="confirmReceive">查看物流</view> -->
+          <view class="btn orderPay" wx:if="{{item.status === 2}}" data-id="{{item.id}}" bindtap="confirmTakeGoods">确认收货</view>
+          <view class="btn delete" wx:if="{{item.status === -1 || item.status === 3 || item.status === 5}}" data-id="{{item.id}}" bindtap="deleteOrderRecord">删除订单</view>
         </view>
       </view>
     </view>

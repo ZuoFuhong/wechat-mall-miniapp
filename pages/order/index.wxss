@@ -85,7 +85,7 @@ page {
 }
 .goods .info {
   font-size: 24rpx;
-  width: 380rpx;
+  width: 420rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -93,11 +93,16 @@ page {
   margin-left: 20rpx;
 }
 .info .specs {
-  display: inline;
   background-color: #F3F3F3;
   padding: 5rpx 10rpx;
   font-size: 22rpx;
   color: #999999;
+  margin-top: 5rpx;
+}
+.info .title {
+  height: 80rpx;
+  line-height: 40rpx;
+  overflow: hidden;
 }
 .goods .amount {
   flex-grow: 1;
@@ -120,7 +125,7 @@ page {
   border-top: 1px solid #F7F7F7;
 }
 .bottom .goods-num {
-  width: 340rpx;
+  width: 400rpx;
 }
 .bottom .amount {
   color: black;
