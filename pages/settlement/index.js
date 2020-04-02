@@ -1,5 +1,6 @@
 import coupon from '../../models/coupon'
 import address from '../../models/address'
+import order from '../../models/order'
 
 Page({
   data: {
@@ -163,9 +164,39 @@ Page({
     }
     return parseFloat(discountAmount, 10)
   },
-  submitOrder() {
-    // todo: 此处暂时未处理运费
-    console.log('提交订单')
+  async submitOrder() {
+    const addressId = this.data.address.id
+    if (!addressId) {
+      wx.showToast({
+        icon: 'none',
+        title: '请添加收货地址'
+      })
+      return
+    }
+    const couponLogId = this.data.selectedCoupon.cLogId
+    const amount = this.data.amount
+    const goodsList = this.data.goodsList
+    const cartIds = []
+    for (let i = 0; i < goodsList.length; i++) {
+      cartIds.push({
+        cartId: goodsList[i].id || 0,
+        num: goodsList[i].num,
+        goodsId: goodsList[i].goodsId,
+        skuId: goodsList[i].skuId
+      })
+    }
+    const res = await order.placeOrder(addressId, couponLogId, "0", amount.toString(), cartIds)
+    const { error_code, msg } = res
+    if (error_code !== undefined) {
+      wx.showToast({
+        icon: 'none',
+        title: msg
+      })
+      return
+    }
+    // todo: 拿到预支付ID，拉起支付窗口，支付成功跳转订单详情页
+    // {"orderNo":"20200402162131155859","prepayId":"20200402162131155859"}
+    console.log(res)
   },
   scrolltolowerEvent() {
     if (!this.data.hasMoreCoupon) {

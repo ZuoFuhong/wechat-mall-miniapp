@@ -21,13 +21,12 @@ Page({
     selectSpecAttr: {}, // 是否可选的状态
     outofStockStatus: false  // 缺货状态
   },
-  onLoad(e) {
+  async onLoad(e) {
     wx.showShareMenu({
       withShareTicket: true
     }) 
     this.data.goodsId = e.id
-  },
-  async onShow (){
+    wx.removeStorageSync("goods")
     await this.loadGoodsInfo()
     await this.loadCouponList()
   },
@@ -336,7 +335,41 @@ Page({
   },
   toBuyNow () {
     if (this.checkGoodsSelectAndStock()) {
-      console.log('现在购买: skuId = ', this.data.selectSkuId, ' goodsId = ', this.data.goodsId, ' num = ', this.data.buyNum)
+      const curSkuId = this.data.selectSkuId
+      const goodsDetail = this.data.goodsDetail
+      const skuList = goodsDetail.skuList
+      let skuInst = {}
+      let specs = ''
+      for (let i = 0; i < skuList.length; i++) {
+        const sku = skuList[i]
+        if (sku.id === curSkuId) {
+          const specList = JSON.parse(sku.specs)
+          
+          for (let j = 0; j < specList.length; j++) {
+            const spec = specList[j]
+            specs += spec.value + '; '
+          }
+          if (specs.length < 2) {
+            continue
+          }
+          specs = specs.substring(0, specs.length - 2)
+          skuInst = sku
+        }
+      }
+      const goodsInfo = {
+        goodsId: goodsDetail.id,
+        skuId: skuInst.id,
+        title: goodsDetail.title,
+        price: skuInst.price,
+        picture: skuInst.picture,
+        specs: specs,
+        num: this.data.buyNum
+      }
+      // 直接购买，通过缓存传递
+      wx.setStorageSync("goods", [goodsInfo])
+      wx.navigateTo({
+        url: '/pages/settlement/index'
+      })
     }
   },
   // 检查选择规格的状态和库存

@@ -21,7 +21,7 @@
         <view class='soldInfo'>
           <view class='good-price-box'>
             <view class="price">¥{{item.price}}</view>
-            <view class="saleNum">{{item.saleNum}}人付款</view>
+            <view class="saleNum">{{item.humanNum}}人付款</view>
           </view>
         </view>
       </view>

@@ -31,7 +31,7 @@
       <view class="goods-title">{{item.title}}</view>
       <view style='display:flex;'>
         <view class="goods-price">¥ {{item.price}}</view>
-        <view class="goods-sale">{{item.saleNum}}人付款</view>
+        <view class="goods-sale">{{item.humanNum}}人付款</view>
       </view>
     </view>
   </view>
