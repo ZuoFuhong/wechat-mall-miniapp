@@ -129,9 +129,16 @@ Page({
     let tmpSpecs = ""
     for (let i = 0; i < specList.length; i++) {
       const spec = specList[i]
-      if (selectSpecs[spec.specId] !== 0) {
+      const attrList = spec.attrList
+      const curAttrId = selectSpecs[spec.specId]
+      if (curAttrId !== 0) {
         skipCount += 1
-        tmpSpecs += '"' + spec.name + '"'
+        for (let j = 0; j < attrList.length; j++) {
+          const attr = attrList[j]
+          if (attr.attrId === curAttrId) {
+            tmpSpecs += '"' + attr.value + '"'
+          }
+        }
         continue
       }
       stockName += spec.name + ','

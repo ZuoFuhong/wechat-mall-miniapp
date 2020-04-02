@@ -13,7 +13,7 @@ Page({
     banners: [],
     categories: [],
     goodsList: [],
-    curPage: 1,
+    curPage: 0,
     pageSize: 10,
   },
   tabClick: function(e) {
@@ -35,7 +35,7 @@ Page({
     })
     await this.loadHomeBanner()
     await this.loadHomeGrid()
-    await this.getGoodsList(this.data.curPage, this.data.pageSize)
+    await this.getGoodsList()
   },
   async loadHomeBanner() {
     const banners = await banner.getHomeBanner(1, 3)
@@ -51,23 +51,22 @@ Page({
       return
     }
     this.setData({
-      categories: data,
-      curPage: 1
+      categories: data
     });
   },
   onPageScroll(e) {
   },
-  async getGoodsList(page, size) {
+  async getGoodsList() {
     wx.showLoading({
       "mask": true
     })
-    const res = await goods.getGoodsList('', 0, 0, page, size)
+    const curPage = this.data.curPage + 1
+    const res = await goods.getGoodsList('', 0, 0, curPage, this.data.pageSize)
     const {error_code, msg} = res
     if (error_code !== undefined) {
       console.log(msg)
       return
     }
-    const curPage = this.data.curPage
     let goodsList = this.data.goodsList
     if (curPage === 1) {
       goodsList = res.list
@@ -76,6 +75,7 @@ Page({
     }
     const loadingMoreHidden = res.list.length === this.data.pageSize
     this.setData({
+      curPage: curPage,
       loadingMoreHidden: loadingMoreHidden,
       goodsList: goodsList
     });
@@ -91,17 +91,13 @@ Page({
     if (!this.data.loadingMoreHidden) {
       return
     }
-    const page = this.data.curPage + 1
-    this.setData({
-      curPage: page
-    });
-    this.getGoodsList(page, this.data.pageSize)
+    this.getGoodsList()
   },
   onPullDownRefresh: function() {
     this.setData({
-      curPage: 1
+      curPage: 0
     });
-    this.getGoodsList(1, this.data.pageSize)
+    this.getGoodsList()
     wx.stopPullDownRefresh()
   },
   bindinput(e) {

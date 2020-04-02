@@ -25,7 +25,7 @@
           </view>
         </view>
       </view>
-      <view class="morePlace" hidden="{{loadingMoreHidden ? true : false}}">
+      <view class="morePlace" wx:if="{{curPage > 1 && !loadingMoreHidden}}">
         <view class="l"></view>
         <view>没有更多啦</view>
         <view class="r"></view>

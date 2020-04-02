@@ -38,7 +38,10 @@
     </view>
   </navigator>
 </view>
-<view class="morePlace" hidden="{{loadingMoreHidden ? true : false}}">
+<view class="morePlace" wx:if="{{goods.length === 0}}">
+  <view>没有搜索结果</view>
+</view>
+<view class="morePlace" wx:if="{{curPage > 1 && !loadingMoreHidden}}">
   <view class="l"></view>
   <view>没有更多啦</view>
   <view class="r"></view>

@@ -6,7 +6,7 @@ Page({
     listType: 1, // 1为1个商品一行，2为2个商品一行    
     keyword: '', // 搜索关键词
     sort: 0, // 排序规则：0-综合 1-新品 2-销量 3-价格
-    curPage: 1,
+    curPage: 0,
     pageSize: 10,
     goods: [],
     loadingMoreHidden: true,
@@ -23,14 +23,22 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    const res = await goods.getGoodsList(this.data.keyword, this.data.sort, this.data.categoryId, this.data.curPage, this.data.pageSize)
+    const curPage = this.data.curPage + 1
+    let goodsList = this.data.goods
+    const res = await goods.getGoodsList(this.data.keyword, this.data.sort, this.data.categoryId, curPage, this.data.pageSize)
     const { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
       return
     }
+    if (curPage === 1) {
+      goodsList = res.list
+    } else {
+      goodsList = goodsList.concat(res.list)
+    }
     this.setData({
-      goods: res.list,
+      curPage: curPage,
+      goods: goodsList,
       loadingMoreHidden: res.list.length === this.data.pageSize
     })
     wx.hideLoading()
@@ -40,21 +48,7 @@ Page({
     if (!this.data.loadingMoreHidden) {
       return
     }
-    let curPage = this.data.curPage
-    let goodsList = this.data.goods
-    curPage += 1
-    const res = await goods.getGoodsList(this.data.keyword, this.data.sort, this.data.categoryId, curPage, this.data.pageSize)
-    const { error_code, msg } = res
-    if (error_code !== undefined) {
-      console.log(msg)
-      return
-    }
-    goodsList = goodsList.concat(res.list)
-    this.setData({
-      curPage: curPage,
-      goods: goodsList,
-      loadingMoreHidden: res.list.length === this.data.pageSize
-    })    
+    this.search()   
   },
   changeShowType(){
     if (this.data.listType == 1) {
@@ -74,16 +68,16 @@ Page({
   },
   bindconfirm(e){
     this.setData({
-      curPage: 1,
+      curPage: 0,
       categoryId: 0,
-      keyword: e.detail.value
+      keyword: e.detail.value,
     })
     this.search()
   },
   filter(e){
     this.setData({
       sort: parseInt(e.currentTarget.dataset.val, 10),
-      curPage: 1
+      curPage: 0,
     })
     this.search()
   },

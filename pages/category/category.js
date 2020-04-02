@@ -7,7 +7,7 @@ Page({
     selectCategoryId: 0,
     currentGoods: [],
     scrolltop: 0,
-    curPage: 1,
+    curPage: 0,
     pageSize: 10,
     loadingMoreHidden: true
   },
@@ -38,7 +38,7 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
-    let curPage = this.data.curPage
+    let curPage = this.data.curPage + 1
     const res = await goods.getGoodsList('', 0, this.data.selectCategoryId, curPage, this.data.pageSize)
     const { error_code, msg } = res
     if (error_code !== undefined) {
@@ -50,7 +50,7 @@ Page({
     currentGoods = currentGoods.concat(res.list)
     wx.hideLoading()
     this.setData({
-      curPage: ++curPage,
+      curPage: curPage,
       currentGoods: currentGoods,
       loadingMoreHidden: res.list.length === this.data.pageSize
     });
@@ -73,7 +73,7 @@ Page({
       this.setData({
         selectCategoryId: id,
         scrolltop: 0,
-        curPage: 1,
+        curPage: 0,
         currentGoods: [],
         loadingMoreHidden: true
       });
