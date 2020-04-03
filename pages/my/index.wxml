@@ -2,7 +2,7 @@
   <view class="user">
     <image src="{{userInfo.avatar || '/images/icon/avatar.svg'}}" />
     <view class="info">
-      <button class="auth" wx:if="{{!userInfo.avatar}}" open-type="getUserInfo" bindgetuserinfo="doAuthInfo">未授权</button>
+      <button class="auth" wx:if="{{!userInfo.avatar}}" open-type="getUserInfo" bindgetuserinfo="doAuthInfo">登录</button>
       <view class="nickname">{{userInfo.nickName}}</view>
       <view class="phone">{{userInfo.mobile}}</view>
     </view>
@@ -16,17 +16,17 @@
       <view class="btn-item" data-id="0" bindtap="goMyOrder">
         <image src="/images/my/wait-pay.svg" />
         <view>待付款</view>
-        <view class="num">{{waitPay}}</view>
+        <view wx:if="{{waitPay > 0}}" class="num">{{waitPay}}</view>
       </view>
       <view class="btn-item" data-id="1" bindtap="goMyOrder">
         <image style="width:62rpx;height:62rpx;" src="/images/my/wait-send.svg" />
         <view>待发货</view>
-        <view class="num">{{notExpress}}</view>
+        <view wx:if="{{notExpress > 0}}" class="num">{{notExpress}}</view>
       </view>
       <view class="btn-item" data-id="2" bindtap="goMyOrder">
         <image src="/images/my/wait-receive.svg" />
         <view>待收货</view>
-        <view class="num">{{waitReceive}}</view>
+        <view wx:if="{{waitReceive > 0}}" class="num">{{waitReceive}}</view>
       </view>
       <view class="btn-item" data-id="3" bindtap="goMyOrder">
         <image src="/images/my/order-finish.svg" />

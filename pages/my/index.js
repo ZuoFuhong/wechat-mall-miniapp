@@ -5,14 +5,16 @@ import config from '../../config'
 Page({
 	data: {
     userInfo: {},
-    waitPay: 4,   // 待付款
-    notExpress: 1,  // 待发货
-    waitReceive: 1  // 待收货
+    waitPay: 0,   // 待付款
+    notExpress: 0,  // 待发货
+    waitReceive: 0  // 待收货
   },
-  async onLoad() {
-    await this.getUserInfo()
+  onLoad() {
+    this.setData({
+      userInfo: wx.getStorageSync('user')
+    })
   },
-  onShow() {
+  async onShow() {
     this.loadOrderRemind()
   },
   // 加载提醒的订单数量
@@ -29,17 +31,6 @@ Page({
       waitReceive: res.waitReceive
     })
   },
-  async getUserInfo () {
-    const res = await user.getUserInfo()
-    let { error_code, msg } = res
-    if (error_code !== undefined) {
-      console.log(msg)
-    } else {
-      this.setData({
-        userInfo: res
-      })
-    }
-  },
   // 主动授权用户信息
   async doAuthInfo(res) {
     const userInfo = res.detail.userInfo
@@ -55,26 +46,39 @@ Page({
         this.setData({
           userInfo: originInfo
         })
+        wx.setStorageSync('user', originInfo)
       }
     }
   },
   goMyCoupon() {
+    if (!this.checkUserLogin()) {
+      return
+    }
     wx.navigateTo({
       url: "/pages/my/coupon/index"
     })
   },
   goMyOrder(event) {
+    if (!this.checkUserLogin()) {
+      return
+    }
     const status = event.currentTarget.dataset.id
     wx.navigateTo({
       url: '/pages/order/index?status=' + status
     })
   },
   goMyAddress() {
+    if (!this.checkUserLogin()) {
+      return
+    }
     wx.navigateTo({
       url: '/pages/address/index'
     })
   },
   goMyBrowse() {
+    if (!this.checkUserLogin()) {
+      return
+    }
     wx.navigateTo({
       url: '/pages/browse/index'
     })
@@ -83,5 +87,16 @@ Page({
     wx.makePhoneCall({
       phoneNumber: config.phoneNumber
     })
+  },
+  // 检查用户登录
+  checkUserLogin() {
+    if (this.data.userInfo.avatar === '') {
+      wx.showToast({
+        icon: 'none',
+        title: '您暂未登录，请先登录'
+      })
+      return false
+    }
+    return true
   }
 })

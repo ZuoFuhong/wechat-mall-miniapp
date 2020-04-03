@@ -132,6 +132,11 @@ page {
 .coupon-list {
   padding: 18rpx 0;
 }
+.empty{
+  font-size: 24rpx;
+  color: #666666;
+  padding: 10rpx 30rpx;
+}
 .coupon {
   padding: 18rpx 30rpx;
   display: flex;

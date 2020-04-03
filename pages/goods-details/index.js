@@ -323,6 +323,9 @@ Page({
     });
   },
   async addShopCar() {
+    if (!this.checkUserLogin()) {
+      return
+    }
     this.setData({
       hideShopPopup: false,
       operationType: 1
@@ -344,6 +347,9 @@ Page({
     }
   },
   buyNow: function(e) {
+    if (!this.checkUserLogin()) {
+      return
+    }
     this.setData({
       hideShopPopup: false,
       operationType: 2
@@ -441,4 +447,16 @@ Page({
       path: `/pages/goods-details/index?id=${this.data.goodsId}`
     }
   },
+  // 检查用户登录
+  checkUserLogin() {
+    const userInfo = wx.getStorageSync('user')
+    if (userInfo.avatar === '') {
+      wx.showToast({
+        icon: 'none',
+        title: '您暂未登录，请先登录',
+      })
+      return false
+    }
+    return true
+  }
 })
