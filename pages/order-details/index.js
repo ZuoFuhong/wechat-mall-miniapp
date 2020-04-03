@@ -3,6 +3,7 @@ import order from '../../models/order'
 Page({
   data: {
     orderNo: '',
+    origin: 0,
     refundPopup: false,
     selectReason: 0,
     orderDetail: {},
@@ -31,7 +32,9 @@ Page({
     refundAllow: false  // 是否允许退款
   },
   onLoad(e) {
+    console.log(e)
     this.setData({
+      origin: parseInt(e.origin, 10) || 0,
       orderNo: e.orderNo || ''
     })
   },
@@ -182,5 +185,20 @@ Page({
     wx.navigateTo({
       url: '/pages/refund-details/index?refundNo=' + this.data.orderDetail.refundApply.refundNo
     })
+  },
+  // 复制订单号
+  copyOrderNo() {
+    wx.setClipboardData({
+      data: this.data.orderDetail.orderNo
+    })
+  },
+  // 订单支付成功的回退页
+  onUnload(){
+    const origin = this.data.origin
+    if (origin === 1) {
+      wx.reLaunch({
+        url: '/pages/my/index'
+      })
+    }
   }
 })

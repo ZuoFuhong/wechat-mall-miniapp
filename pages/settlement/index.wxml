@@ -6,7 +6,7 @@
     </view>
     <view class="address-info" wx:if="{{address.id !== 0}}">
       <image class="position" src="/images/address/position-black.svg" />
-      <view class="info">
+      <view class="info" data-id="{{address.id}}" bindtap="selectAddress">
         <view class="contacts">{{address.contacts}}<text class="mobile">{{address.mobile}}</text></view>
         <view class="detail">{{address.provinceStr}} {{address.cityStr}} {{address.areaStr}} {{address.address}}</view>
       </view>

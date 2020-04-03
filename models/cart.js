@@ -19,6 +19,10 @@ class Cart {
   async getCartList(page, size) {
     return get(`/api/cart/list?page=${page}&size=${size}`)
   }
+
+  async getCartGoodsNum() {
+    return get('/api/cart/goods_num')
+  }
 }
 
 export default new Cart()

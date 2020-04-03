@@ -1,12 +1,33 @@
 import user from '../../models/user'
+import order from '../../models/order'
 import config from '../../config'
 
 Page({
 	data: {
-    userInfo: {}
+    userInfo: {},
+    waitPay: 4,   // 待付款
+    notExpress: 1,  // 待发货
+    waitReceive: 1  // 待收货
   },
   async onLoad() {
     await this.getUserInfo()
+  },
+  onShow() {
+    this.loadOrderRemind()
+  },
+  // 加载提醒的订单数量
+  async loadOrderRemind() {
+    const res = await order.getOrderRemind()
+    const { error_code, msg } = res
+    if (error_code !== undefined) {
+      console.log(msg)
+      return
+    }
+    this.setData({
+      waitPay: res.waitPay,
+      notExpress: res.notExpress,
+      waitReceive: res.waitReceive
+    })
   },
   async getUserInfo () {
     const res = await user.getUserInfo()

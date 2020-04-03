@@ -51,7 +51,7 @@
       <text>首页</text>
     </view>
     <view class="shop-cart-btn" bindtap="goShopCar">
-      <!-- <view class="shop-num">{{shopNum}}</view> -->
+      <view class="shop-num">{{cartNum}}</view>
       <image src="/images/icon/car-black.svg"></image>
       <text>购物车</text>
     </view>

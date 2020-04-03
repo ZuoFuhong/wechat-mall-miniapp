@@ -9,25 +9,26 @@ page {
 .edit-address .item {
   display: flex;
   align-items: center;
-  font-size: 24rpx;
+  font-size: 28rpx;
   border-bottom: 1px solid #F7F7F7;
   padding: 20rpx;
 }
 .item .l {
   color: #979797;
-  width: 100rpx;
+  width: 120rpx;
 }
 .item .r {
   margin-left: 20rpx;
+  flex-grow: 1;
 }
 .save-btn {
   position: fixed;
   width: 100%;
-  height: 80rpx;
+  height: 100rpx;
   background-color: #EB405D;
-  line-height: 80rpx;
+  line-height: 100rpx;
   text-align: center;
   color: #ffffff;
   bottom: 0;
-  font-size: 24rpx;
+  font-size: 28rpx;
 }

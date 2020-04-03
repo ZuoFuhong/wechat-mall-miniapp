@@ -7,7 +7,7 @@ Page({
   },
   onLoad(e) {
     this.setData({
-      selectAddressId: parseInt(e.id, 10)
+      selectAddressId: parseInt(e.id, 10) || 0
     })
   },
   onShow() {
@@ -28,10 +28,6 @@ Page({
   // 选择地址
   selectAddress(e) {
     let addressId = e.currentTarget.dataset.id
-    const selectAddressId = this.data.selectAddressId
-    if (selectAddressId === addressId) {
-      addressId = 0
-    }
     this.setData({
       selectAddressId: addressId
     })
@@ -45,6 +41,13 @@ Page({
   confirmAddress() {
     const addressList = this.data.addressList
     const selectAddressId = this.data.selectAddressId
+    if (selectAddressId === 0) {
+      wx.showToast({
+        icon: 'none',
+        title: '还没有选择地址'
+      })
+      return
+    }
     let curAddress = {}
     for (let i = 0; i < addressList.length; i++) {
       const address = addressList[i]

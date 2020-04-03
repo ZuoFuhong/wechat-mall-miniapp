@@ -46,7 +46,7 @@
     <view class="title">订单信息</view>
     <view class="order-item orderNo">
       <view>订单编号：{{orderDetail.orderNo}}</view>
-      <view style="color: #EB405D;">复制</view>
+      <view style="color: #EB405D;" bindtap="copyOrderNo">复制</view>
     </view>
     <view class="order-item">下单时间：{{orderDetail.placeTime}}</view>
     <view class="order-item" wx:if="{{orderDetail.status > 0}}">付款时间：{{orderDetail.payTime}}</view>

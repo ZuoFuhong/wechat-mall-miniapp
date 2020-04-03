@@ -4,6 +4,7 @@ import cart from '../../models/cart'
 
 Page({
   data: {
+    cartNum: 10,  // 购物车商品数量
     goodsDetail: {},
     hideShopPopup: true,
     coupons: [],
@@ -29,6 +30,9 @@ Page({
     wx.removeStorageSync("goods")
     await this.loadGoodsInfo()
     await this.loadCouponList()
+  },
+  onShow() {
+    this.loadCartGoodsNum()
   },
   async loadGoodsInfo() {
     const data = await goods.getGoodsDetails(this.data.goodsId)
@@ -292,6 +296,17 @@ Page({
       coupons: data.list
     })
   },
+  async loadCartGoodsNum() {
+    const res = await cart.getCartGoodsNum()
+    const { error_code, msg } = res
+    if (error_code !== undefined) {
+      console.log(msg)
+      return
+    }
+    this.setData({
+      cartNum: res.num
+    })
+  },
   goCoupons() {
     wx.navigateTo({
       url: '/pages/coupons/index'
@@ -325,6 +340,7 @@ Page({
         title: '添加成功'
       })
       this.closePopupTap()
+      this.loadCartGoodsNum()
     }
   },
   buyNow: function(e) {

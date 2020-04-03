@@ -202,7 +202,7 @@ Page({
     })
     setTimeout(function () {
       wx.navigateTo({
-        url: '/pages/order-details/index?orderNo=' + res.orderNo
+        url: '/pages/order-details/index?origin=1&orderNo=' + res.orderNo
       })
     }, 1500)
   },

@@ -42,6 +42,10 @@ class Order {
   async undoOrderRefund(refundNo) {
     return put(`/api/order/refund_undo?refundNo=${refundNo}`)
   }
+
+  async getOrderRemind() {
+    return get('/api/order/remind')
+  }
 }
 
 export default new Order()

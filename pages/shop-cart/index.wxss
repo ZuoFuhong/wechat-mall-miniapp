@@ -81,13 +81,17 @@ scroll-view {
 }
 .select-btn {
   box-sizing: border-box;
-  border: 1px solid #EB405D;
+  border: 1px solid #666666;
   border-radius: 20rpx;
   width: 40rpx;
   height: 40rpx;
-  background-color: #F5E3E6;
+}
+.select-btn image {
+  width: 28rpx;
+  height: 28rpx;
 }
 .selected {
+  border-color: #EB405D;
   background-color: #EB405D;
   color: white;
   display: flex;

@@ -57,13 +57,13 @@ page {
 .add-btn {
   position: fixed;
   width: 100%;
-  height: 80rpx;
+  height: 100rpx;
   background-color: #EB405D;
-  line-height: 80rpx;
+  line-height: 100rpx;
   text-align: center;
   color: #ffffff;
   bottom: 0;
-  font-size: 24rpx;
+  font-size: 28rpx;
 }
 /* 单选按钮 */
 .radio {

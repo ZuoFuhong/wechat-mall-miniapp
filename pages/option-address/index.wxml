@@ -1,9 +1,7 @@
-<view class="empty" wx:if="{{addressList.length === 0}}">
-  <view class="empty-l"></view>
-  <view>没有数据</view>
-  <view class="empty-r"></view>
-</view>
-<view class="address-list" wx:if="{{addressList.length !== 0}}">
+<view class="address-list">
+  <view class="new-address">
+    <view class="btn" bindtap="addAddress">添加地址</view>
+  </view>
   <view class="address" wx:for="{{addressList}}">
     <view class="radio" data-id="{{item.id}}" wx:if="{{selectAddressId !== item.id}}" bindtap="selectAddress"></view>
     <view class="radio checked" data-id="{{item.id}}" wx:if="{{selectAddressId === item.id}}" bindtap="selectAddress">
@@ -15,5 +13,4 @@
     </view>
   </view>
 </view>
-<view class="add-btn" wx:if="{{selectAddressId !== 0}}" bindtap="confirmAddress">确认</view>
-<view class="add-btn" wx:if="{{selectAddressId === 0}}" bindtap="addAddress">添加收货地址</view>
+<view class="add-btn" bindtap="confirmAddress">确认</view>

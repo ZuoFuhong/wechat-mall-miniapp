@@ -71,6 +71,20 @@ page {
   align-items: center;
   justify-content: space-between;
   color: #666666;
+  position: relative;
+}
+.btn-item .num {
+  width: 28rpx;
+  height: 28rpx;
+  border-radius: 14rpx;
+  position: absolute;
+  background-color: #9E2731;
+  top: 0;
+  right: 10rpx;
+  color: #ffffff;
+  line-height: 28rpx;
+  font-size: 20rpx;
+  text-align: center;
 }
 .btn-item image {
   height: 55rpx;
