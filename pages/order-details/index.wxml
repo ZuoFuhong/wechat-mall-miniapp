@@ -56,7 +56,8 @@
   <view class="btn-group">
     <view class="btn" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === 0}}" bindtap="cancelOrder">取消订单</view>
     <view class="btn active" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === 0}}" bindtap="orderPay">付款</view>
-    <view class="btn active" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === 1}}" bindtap="orderRefund">退款</view>
+    <view class="btn active" data-id="{{orderDetail.id}}" wx:if="{{refundAllow}}" bindtap="orderRefund">退款</view>
+    <view class="btn" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === 4}}" bindtap="goRefundDetail">退款中</view>
     <view class="btn active" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === 2}}" bindtap="confirmTakeGoods">确认收货</view>
     <view class="btn" data-id="{{orderDetail.id}}" wx:if="{{orderDetail.status === -1 || orderDetail.status === 3 || orderDetail.status === 5}}" bindtap="deleteOrderRecord">删除订单</view>
   </view>

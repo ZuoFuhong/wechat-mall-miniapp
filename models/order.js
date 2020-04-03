@@ -30,9 +30,17 @@ class Order {
   }
 
   async refundApply(orderNo, reason) {
-    return put('/api/order/refund', {
+    return put('/api/order/refund_apply', {
       orderNo, reason
     })
+  }
+
+  async refundDetail(refundNo) {
+    return get(`/api/order/refund_detail?refundNo=${refundNo}`)
+  }
+
+  async undoOrderRefund(refundNo) {
+    return put(`/api/order/refund_undo?refundNo=${refundNo}`)
   }
 }
 

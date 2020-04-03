@@ -120,10 +120,10 @@
 					"scene": null
 				},
 				{
-					"id": -1,
+					"id": 10,
 					"name": "退款详情",
 					"pathName": "pages/refund-details/index",
-					"query": "",
+					"query": "refundNo=20200402234617021507",
 					"scene": null
 				},
 				{

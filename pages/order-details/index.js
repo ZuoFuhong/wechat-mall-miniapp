@@ -27,17 +27,17 @@ Page({
         id: 5,
         reason: '其它原因'
       }
-    ]
+    ],
+    refundAllow: false  // 是否允许退款
   },
   onLoad(e) {
     this.setData({
       orderNo: e.orderNo || ''
     })
-    this.loadOrderDetail()
   },
   onShow() {
     this.closePopup()
-    console.log('刷新订单详情')
+    this.loadOrderDetail()
   },
   // 加载订单
   async loadOrderDetail() {
@@ -48,7 +48,8 @@ Page({
       return
     }
     this.setData({
-      orderDetail: res
+      orderDetail: res,
+      refundAllow: res.status === 1 && res.refundApply.refundNo === ''
     })
   },
   // 退款申请
@@ -105,6 +106,7 @@ Page({
       selectReason: parseInt(e.currentTarget.dataset.id, 10)
     })
   },
+  // 取消订单
   async cancelOrder(e) {
     const that = this
     wx.showModal({
@@ -125,6 +127,7 @@ Page({
       }
     })
   },
+  // 删除订单
   async deleteOrderRecord(e) {
     const that = this
     wx.showModal({
@@ -145,6 +148,7 @@ Page({
       }
     })
   },
+  // 确认收货
   async confirmTakeGoods(e) {
     const that = this
     wx.showModal({
@@ -173,4 +177,10 @@ Page({
       title: '演示环境，不支持微信支付'
     })
   },
+  // 退款详情
+  goRefundDetail() {
+    wx.navigateTo({
+      url: '/pages/refund-details/index?refundNo=' + this.data.orderDetail.refundApply.refundNo
+    })
+  }
 })
