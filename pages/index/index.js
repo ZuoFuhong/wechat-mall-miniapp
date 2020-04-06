@@ -26,16 +26,16 @@ Page({
       url: "/pages/goods-details/index?id=" + e.currentTarget.dataset.id
     })
   },
-  async onLoad(e) {
+  onLoad(e) {
     wx.showShareMenu({
       withShareTicket: true
     }) 
     wx.setNavigationBarTitle({
       title: config.shopName
     })
-    await this.loadHomeBanner()
-    await this.loadHomeGrid()
-    await this.getGoodsList()
+    this.loadHomeBanner()
+    this.loadHomeGrid()
+    this.getGoodsList()
   },
   async loadHomeBanner() {
     const banners = await banner.getHomeBanner(1, 3)
@@ -58,13 +58,15 @@ Page({
   },
   async getGoodsList() {
     wx.showLoading({
-      "mask": true
+      mask: true,
+      title: '加载中'
     })
     const curPage = this.data.curPage + 1
     const res = await goods.getGoodsList('', 0, 0, curPage, this.data.pageSize)
     const {error_code, msg} = res
     if (error_code !== undefined) {
       console.log(msg)
+      wx.hideLoading()
       return
     }
     let goodsList = this.data.goodsList

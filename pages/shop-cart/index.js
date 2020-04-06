@@ -14,14 +14,19 @@ Page({
   async onLoad() {
     wx.removeStorageSync("goods")
   },
-  async onShow() {
-    await this.loadCartList()
+  onShow() {
+    this.loadCartList()
   },
   async loadCartList() {
+    wx.showLoading({
+      mask: true,
+      title: '加载中'
+    })
     const res = await cart.getCartList(this.data.curPage, this.data.pageSize)
     const { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
+      wx.hideLoading()
       return
     }
     for (let i = 0; i < res.list.length; i++) {
@@ -47,6 +52,7 @@ Page({
     this.setData({
       goodsList: res.list
     })
+    wx.hideLoading()
   },
   // 单选
   doSelectCart(e) {
@@ -150,7 +156,10 @@ Page({
     }
   },
   async doDeleteCart(e) {
-    wx.showLoading()
+    wx.showLoading({
+      mask: true,
+      title: '加载中'
+    })
     const id = e.currentTarget.dataset.id
     const res = await cart.editCart(id, 0)
     const { error_code, msg } = res

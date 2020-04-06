@@ -16,6 +16,7 @@ Page({
   },
   async categories() {
     wx.showLoading({
+      mask: true,
       title: '加载中',
     })
     const res = await category.getCategoryList()
@@ -36,6 +37,7 @@ Page({
       return
     }
     wx.showLoading({
+      mask: true,
       title: '加载中',
     })
     let curPage = this.data.curPage + 1
@@ -48,12 +50,12 @@ Page({
     }
     let currentGoods = this.data.currentGoods
     currentGoods = currentGoods.concat(res.list)
-    wx.hideLoading()
     this.setData({
       curPage: curPage,
       currentGoods: currentGoods,
       loadingMoreHidden: res.list.length === this.data.pageSize
     });
+    wx.hideLoading()
   },
   async doScrolltoupper() {
     this.getGoodsList()

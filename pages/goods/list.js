@@ -21,6 +21,7 @@ Page({
   },
   async search(){
     wx.showLoading({
+      mask: true,
       title: '加载中',
     })
     const curPage = this.data.curPage + 1
@@ -29,6 +30,7 @@ Page({
     const { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
+      wx.hideLoading()
       return
     }
     if (curPage === 1) {

@@ -21,11 +21,16 @@ Page({
   },
   // 加载订单列表
   async loadOrderList() {
+    wx.showLoading({
+      mask: true,
+      title: '加载中'
+    })
     const curPage = this.data.curPage + 1
     const res = await order.getOrderList(this.data.status, curPage, this.data.pageSize)
     const { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
+      wx.hideLoading()
       return      
     }
     let orderList = this.data.orderList
@@ -39,6 +44,7 @@ Page({
       curPage: curPage,
       loadingMoreHidden: res.list.length === this.data.pageSize
     })
+    wx.hideLoading()
   },
   // 支付窗口
   async orderPay(e) {
@@ -125,7 +131,8 @@ Page({
     }
     this.setData({
       curPage: 0,
-      status: parseInt(status, 10)
+      status: parseInt(status, 10),
+      orderList: []
     })
     this.loadOrderList()
   },

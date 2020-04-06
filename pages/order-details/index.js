@@ -44,16 +44,22 @@ Page({
   },
   // 加载订单
   async loadOrderDetail() {
+    wx.showLoading({
+      mask: true,
+      title: '加载中'
+    })
     const res = await order.getOrderDetail(this.data.orderNo)
     const { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
+      wx.hideLoading()
       return
     }
     this.setData({
       orderDetail: res,
       refundAllow: res.status === 1 && res.refundApply.refundNo === ''
     })
+    wx.hideLoading()
   },
   // 退款申请
   orderRefund(e) {

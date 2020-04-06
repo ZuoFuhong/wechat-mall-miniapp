@@ -2,16 +2,22 @@ import coupon from '../../../models/coupon'
 
 Page({
   data: {
-    status: 0
+    status: 0,
+    coupons: []
   },
   onShow() {
     this.loadUserCoupon()
   },
   async loadUserCoupon() {
+    wx.showLoading({
+      mask: true,
+      title: '加载中'
+    })
     const res = await coupon.getUserCouponList(this.data.status, 1, 500)
     const { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
+      wx.hideLoading()
       return
     }
     const coupons = []
@@ -53,18 +59,18 @@ Page({
     this.setData({
       coupons: coupons
     })
+    wx.hideLoading()
   },
   switchStatus(e) {
     const status = e.currentTarget.dataset.id
     if (parseInt(status, 10) === this.data.status) {
       return
     }
-    wx.showLoading()
     this.setData({
+      coupons: [],
       status: parseInt(status, 10)
     })
     this.loadUserCoupon()
-    wx.hideLoading()
   },
   goShopping() {
     wx.navigateTo({

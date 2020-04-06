@@ -21,12 +21,17 @@ Page({
     this.clearSelect()
   },
   async loadBrowseHistory() {
+    wx.showLoading({
+      mask: true,
+      title: '加载中'
+    })
     const selectRecord = this.data.selectRecord
     let curPage = this.data.curPage
     const res = await browse.getBrowseHistory(curPage, this.data.pageSize)
     const { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
+      wx.hideLoading()
       return
     }
     const history = this.data.history
@@ -58,6 +63,7 @@ Page({
       loadingMoreHidden: res.list.length === this.data.pageSize,
       selectRecord: selectRecord
     })
+    wx.hideLoading()
   },
   // 单选
   doSelectRecord(e) {
@@ -118,7 +124,10 @@ Page({
   },
   // 清理-记录
   async deleteRecord() {
-    wx.showLoading()
+    wx.showLoading({
+      mask: true,
+      title: '加载中'
+    })
     const selectRecord = this.data.selectRecord
     const ids = []
     for (let i in selectRecord) {

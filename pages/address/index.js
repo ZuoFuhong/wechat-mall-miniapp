@@ -10,10 +10,15 @@ Page({
     this.loadAddressList()
   },
   async loadAddressList() {
+    wx.showLoading({
+      mask: true,
+      title: '加载中'
+    })
     const res = await address.getAddressList(this.data.curPage, this.data.pageSize)
     const { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
+      wx.hideLoading()
       return
     }
     for (let i = 0; i < res.list.length; i++) {
@@ -24,6 +29,7 @@ Page({
     this.setData({
       addressList: res.list
     })
+    wx.hideLoading()
   },
   deleteAddress(e) {
     const addressId = e.currentTarget.dataset.id

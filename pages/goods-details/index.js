@@ -22,19 +22,23 @@ Page({
     selectSpecAttr: {}, // 是否可选的状态
     outofStockStatus: false  // 缺货状态
   },
-  async onLoad(e) {
+  onLoad(e) {
     wx.showShareMenu({
       withShareTicket: true
     }) 
     this.data.goodsId = e.id
     wx.removeStorageSync("goods")
-    await this.loadGoodsInfo()
-    await this.loadCouponList()
+    this.loadGoodsInfo()
+    this.loadCouponList()
   },
   onShow() {
     this.loadCartGoodsNum()
   },
   async loadGoodsInfo() {
+    wx.showLoading({
+      mask: true,
+      title: '加载中'
+    })
     const data = await goods.getGoodsDetails(this.data.goodsId)
     const {error_code, msg} = data
     if (error_code !== undefined) {
@@ -42,6 +46,7 @@ Page({
       this.setData({
         goodsDetail: {}
       })
+      wx.hideLoading()
       return
     }
     const price = this.calcGoodsPriceInterval(data.price, data.skuList)
@@ -63,6 +68,7 @@ Page({
     })
     this.initSelectGoodsSku(data)
     this.initSpecAttrOptionalStatus(data)
+    wx.hideLoading()
   },
   // 计算商品价格区间
   calcGoodsPriceInterval (price, skuList) {
