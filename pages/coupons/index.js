@@ -70,6 +70,7 @@ Page({
       return
     }
     wx.showToast({
+      mask: true,
       title: '领取成功'
     })
   },
