@@ -70,7 +70,7 @@ Page({
     let max = 0
     for (let i = 0; i < skuList.length; i++) {
       const sku = skuList[i]
-      const skuPrice = parseInt(sku.price, 10)
+      const skuPrice = parseFloat(sku.price, 10)
       if (min === 0 || min > skuPrice) {
         min = skuPrice
       }
