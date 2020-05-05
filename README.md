@@ -13,7 +13,7 @@
 
 ### 演示地址
 
-- 小程序商城
+- [小程序商城](https://www.bilibili.com/video/BV1NV411o7xt/)
 
 - CMS管理后台
 
