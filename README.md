@@ -15,7 +15,7 @@
 
 - [小程序商城](https://www.bilibili.com/video/BV1NV411o7xt/)
 
-- CMS管理后台
+- [CMS管理后台](https://www.bilibili.com/video/BV1Ff4y1U7f3/)
 
 
 ### License
