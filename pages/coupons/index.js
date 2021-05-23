@@ -11,7 +11,7 @@ Page({
     this.loadCouponList()
   },
   async loadCouponList () {
-    const res = await coupon.getCouponList(1, this.pageSize)
+    const res = await coupon.getCouponList(1, this.data.pageSize)
     const { error_code, msg } = res
     if (error_code !== undefined) {
       console.log(msg)
