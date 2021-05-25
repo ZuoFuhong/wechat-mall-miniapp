@@ -31,24 +31,29 @@ Page({
       waitReceive: res.waitReceive
     })
   },
-  // 主动授权用户信息
+  // 获取用户信息
   async doAuthInfo(res) {
-    const userInfo = res.detail.userInfo
-    if (userInfo) {
-      const result = await user.updateUserInfo(userInfo)
-      let { error_code, msg } = result
-      if (error_code !== undefined) {
-        console.log(msg)
-      } else {
-        const originInfo = this.data.userInfo
-        originInfo.nickName = userInfo.nickName
-        originInfo.avatar = userInfo.avatarUrl
-        this.setData({
-          userInfo: originInfo
-        })
-        wx.setStorageSync('user', originInfo)
+    wx.getUserProfile({
+      desc: '用于完善会员资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+      success: (res) => {
+        const userInfo = res.userInfo
+        if (userInfo) {
+          const result = user.updateUserInfo(userInfo)
+          let { error_code, msg } = result
+          if (error_code !== undefined) {
+            console.log(msg)
+          } else {
+            const originInfo = this.data.userInfo
+            originInfo.nickName = userInfo.nickName
+            originInfo.avatar = userInfo.avatarUrl
+            this.setData({
+              userInfo: originInfo
+            })
+            wx.setStorageSync('user', originInfo)
+          }
+        }
       }
-    }
+    })
   },
   goMyCoupon() {
     if (!this.checkUserLogin()) {
@@ -93,7 +98,7 @@ Page({
     if (this.data.userInfo.avatar === '') {
       wx.showToast({
         icon: 'none',
-        title: '您暂未登录，请先登录'
+        title: '您暂未登录，请先点击“登录”'
       })
       return false
     }

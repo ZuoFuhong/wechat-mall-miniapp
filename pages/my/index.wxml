@@ -2,7 +2,7 @@
   <view class="user">
     <image src="{{userInfo.avatar || '/images/icon/avatar.svg'}}" />
     <view class="info">
-      <button class="auth" wx:if="{{!userInfo.avatar}}" open-type="getUserInfo" bindgetuserinfo="doAuthInfo">登录</button>
+      <button class="auth" wx:if="{{!userInfo.avatar}}" open-type="getUserInfo" bindtap="doAuthInfo">登录</button>
       <view class="nickname">{{userInfo.nickName}}</view>
       <view class="phone">{{userInfo.mobile}}</view>
     </view>
