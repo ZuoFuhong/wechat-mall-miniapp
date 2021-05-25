@@ -99,6 +99,7 @@ Page({
     this.setData({
       curPage: 0
     });
+    this.loadHomeBanner()
     this.getGoodsList()
     wx.stopPullDownRefresh()
   },
