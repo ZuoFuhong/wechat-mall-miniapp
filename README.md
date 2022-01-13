@@ -17,6 +17,9 @@
 
 - [CMS管理后台](https://www.bilibili.com/video/BV1Ff4y1U7f3/)
 
+### 最佳实践
+
+- [腾讯云微搭低代码开发平台](https://cloud.tencent.com/product/weda) 推荐的最佳应用案例 [【云开发应用】麦兜小店-电商小程序](https://github.com/WeDaHub/incubator-mcdull-mall).
 
 ### License
 
