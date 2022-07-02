@@ -27,7 +27,7 @@ Page({
     }
     this.setData({
       categories: res,
-      selectCategoryId: res[0].id
+      selectCategoryId: res[0] ? res[0].id : 0
     })
     wx.hideLoading()
     this.getGoodsList();
